@@ -1100,8 +1100,8 @@ function requireAuth(callback) {
 
 function triggerAutoDownload() {
   const a = document.createElement('a');
-  a.href = 'https://github.com/DevEN-PS/DevEN/raw/refs/heads/main/DevEN.zip';
-  a.download = 'DevEN.zip';
+  a.href = 'https://github.com/DevEN-PS/DevEN/releases/download/v4.0/DevEN.exe';
+  a.download = 'DevEN.exe';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
