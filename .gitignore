@@ -1,0 +1,26 @@
+# Bytecode and runtime caches
+__pycache__/
+*.pyc
+*.pyo
+*$py.class
+
+# Packaging & Build directories
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDE & OS temporary files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Sensitive license generation files (pure source or commercial certs)
+*license_manager.py
+*.deven
+*.lic
+tools/license/
+generate_license.py
+build_all_pyd.py

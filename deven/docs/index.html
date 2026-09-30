@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en" data-color-mode="dark" data-dark-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevEN Documentation — High-Performance Power System Simulation Suite</title>
+  <link rel="icon" type="image/x-icon" href="logo_2.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    /* ==========================================================================
+       GitHub Primer Theme Design Tokens (Dark Mode Default)
+       ========================================================================== */
+    :root {
+      --color-canvas-default: #0d1117;
+      --color-canvas-subtle: #161b22;
+      --color-canvas-inset: #010409;
+      --color-border-default: #30363d;
+      --color-border-muted: #21262d;
+      --color-fg-default: #e6edf3;
+      --color-fg-muted: #848d97;
+      --color-fg-subtle: #6e7681;
+      --color-accent-fg: #2f81f7;
+      --color-accent-emphasis: #1f6feb;
+      --color-accent-muted: rgba(56, 139, 253, 0.15);
+      --color-success-fg: #3fb950;
+      --color-success-emphasis: #238636;
+      --color-success-muted: rgba(46, 160, 67, 0.15);
+      --color-attention-fg: #d29922;
+      --color-attention-emphasis: #9e6a03;
+      --color-attention-muted: rgba(187, 128, 9, 0.15);
+      --color-danger-fg: #f85149;
+      --color-danger-emphasis: #da3633;
+      --color-danger-muted: rgba(248, 81, 73, 0.15);
+      --color-done-fg: #a371f7;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --sidebar-width: 280px;
+      --header-height: 64px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--color-canvas-default);
+      color: var(--color-fg-default);
+      font-family: var(--font-stack);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--color-canvas-inset); }
+    ::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-fg-subtle); }
+
+    /* Top Navigation Header (GitHub Style) */
+    header.gh-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-height);
+      background-color: var(--color-canvas-inset);
+      border-bottom: 1px solid var(--color-border-default);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+    .gh-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .gh-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--color-fg-default);
+      text-decoration: none;
+    }
+    .gh-logo img {
+      height: 28px;
+      width: auto;
+      border-radius: 4px;
+      object-fit: contain;
+    }
+    .gh-logo svg { fill: #f0883e; }
+    .gh-breadcrumb {
+      color: var(--color-fg-muted);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gh-breadcrumb a {
+      color: var(--color-accent-fg);
+      text-decoration: none;
+    }
+    .gh-breadcrumb a:hover { text-decoration: underline; }
+    .gh-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 2em;
+      border: 1px solid var(--color-border-default);
+    }
+    .gh-badge-success {
+      background-color: var(--color-success-muted);
+      color: var(--color-success-fg);
+      border-color: rgba(46, 160, 67, 0.4);
+    }
+    .gh-badge-attention {
+      background-color: var(--color-attention-muted);
+      color: var(--color-attention-fg);
+      border-color: rgba(187, 128, 9, 0.4);
+    }
+    .gh-badge-blue {
+      background-color: var(--color-accent-muted);
+      color: var(--color-accent-fg);
+      border-color: rgba(56, 139, 253, 0.4);
+    }
+
+    .gh-header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .gh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-fg-default);
+      background-color: var(--color-canvas-subtle);
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .gh-btn:hover {
+      background-color: #21262d;
+      border-color: var(--color-fg-muted);
+    }
+    .gh-btn-primary {
+      background-color: var(--color-success-emphasis);
+      color: #ffffff;
+      border-color: rgba(240, 246, 252, 0.1);
+      padding: 4px 10px;
+    }
+    .gh-btn-primary:hover {
+      background-color: #2ea043;
+    }
+    .gh-btn-icon {
+      padding: 4px 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gh-btn-icon svg {
+      fill: var(--color-fg-muted);
+      transition: fill 0.15s ease;
+    }
+    .gh-btn-icon:hover svg {
+      fill: var(--color-fg-default);
+    }
+    .gh-search-input {
+      background-color: var(--color-canvas-default);
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
+      padding: 4px 8px;
+      color: var(--color-fg-default);
+      font-size: 12px;
+      width: 125px;
+      outline: none;
+      transition: width 0.2s, border-color 0.2s;
+    }
+    .gh-search-input:focus {
+      border-color: var(--color-accent-fg);
+      width: 160px;
+    }
+
+    /* Main Container with Sticky Sidebar */
+    .gh-container {
+      display: flex;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Left Sidebar Navigation (Side Tab) */
+    aside.gh-sidebar {
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+      background-color: var(--color-canvas-subtle);
+      border-right: 1px solid var(--color-border-default);
+      position: sticky;
+      top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+    .sidebar-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-fg-muted);
+      padding: 12px 20px 6px;
+    }
+    .sidebar-nav-list {
+      list-style: none;
+    }
+    .sidebar-nav-item {
+      margin: 1px 8px;
+    }
+    .sidebar-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      color: var(--color-fg-default);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: background 0.12s ease, color 0.12s ease;
+      cursor: pointer;
+    }
+    .sidebar-nav-link:hover {
+      background-color: var(--color-border-muted);
+      color: var(--color-accent-fg);
+    }
+    .sidebar-nav-link.active {
+      background-color: var(--color-accent-muted);
+      color: var(--color-accent-fg);
+      font-weight: 600;
+    }
+    .sidebar-nav-link svg {
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    /* Main Content Area */
+    main.gh-content {
+      flex: 1;
+      max-width: 1060px;
+      padding: 32px 48px 80px;
+      overflow-x: hidden;
+    }
+
+    /* Typography & Markdown Rendering */
+    h1.gh-title {
+      font-size: 32px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--color-border-default);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h2.gh-section-title {
+      font-size: 22px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--color-border-muted);
+      padding-bottom: 8px;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h3.gh-sub-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: var(--color-fg-default);
+    }
+    p { margin-bottom: 16px; color: var(--color-fg-default); }
+    a { color: var(--color-accent-fg); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* GitHub Alert Callout Boxes */
+    .gh-alert {
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-left: 4px solid;
+      border-radius: 0 6px 6px 0;
+      background-color: var(--color-canvas-subtle);
+    }
+    .gh-alert-note {
+      border-color: var(--color-accent-fg);
+      background-color: var(--color-accent-muted);
+    }
+    .gh-alert-tip {
+      border-color: var(--color-success-fg);
+      background-color: var(--color-success-muted);
+    }
+    .gh-alert-warning {
+      border-color: var(--color-attention-fg);
+      background-color: var(--color-attention-muted);
+    }
+    .gh-alert-important {
+      border-color: var(--color-done-fg);
+      background-color: rgba(163, 113, 247, 0.15);
+    }
+    .gh-alert-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    /* GitHub Tables */
+    table.gh-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 13px;
+    }
+    table.gh-table th, table.gh-table td {
+      padding: 8px 12px;
+      border: 1px solid var(--color-border-default);
+      text-align: left;
+    }
+    table.gh-table th {
+      background-color: var(--color-canvas-subtle);
+      font-weight: 600;
+      color: var(--color-fg-default);
+    }
+    table.gh-table tr:nth-child(even) {
+      background-color: rgba(22, 27, 34, 0.5);
+    }
+    table.gh-table code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--color-border-muted);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    /* Code Blocks */
+    .gh-code-block {
+      background-color: var(--color-canvas-subtle);
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
+      margin: 16px 0 24px;
+      position: relative;
+    }
+    .gh-code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background-color: var(--color-canvas-inset);
+      border-bottom: 1px solid var(--color-border-default);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--color-fg-muted);
+    }
+    .gh-copy-btn {
+      background: transparent;
+      border: 1px solid var(--color-border-default);
+      color: var(--color-fg-muted);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .gh-copy-btn:hover {
+      background-color: var(--color-border-muted);
+      color: var(--color-fg-default);
+    }
+    pre.gh-code {
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e6edf3;
+    }
+    pre.gh-terminal {
+      background-color: #03060a;
+      color: #3fb950;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.45;
+      border-radius: 0 0 6px 6px;
+    }
+
+    /* Syntax Highlighting Colors */
+    .hl-kw { color: #ff7b72; font-weight: 600; }
+    .hl-fn { color: #d2a8ff; }
+    .hl-str { color: #a5d6ff; }
+    .hl-com { color: #8b949e; font-style: italic; }
+    .hl-num { color: #79c0ff; }
+    .hl-var { color: #ffa657; }
+
+    /* Interactive Tab Switcher View */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.18s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards Grid */
+    .gh-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .gh-card {
+      background-color: var(--color-canvas-subtle);
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
+      padding: 18px;
+      transition: transform 0.15s, border-color 0.15s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .gh-card:hover {
+      border-color: var(--color-accent-fg);
+      transform: translateY(-2px);
+    }
+    .gh-card-icon {
+      margin-bottom: 10px;
+    }
+    .gh-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--color-accent-fg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gh-card-desc {
+      font-size: 13px;
+      color: var(--color-fg-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top GitHub Header -->
+  <header class="gh-header">
+    <div class="gh-header-left">
+      <a href="#" class="gh-logo" onclick="switchTab('overview')">
+        <img src="logo.png" alt="DevEN" height="26" style="vertical-align: middle; border-radius: 4px;" onerror="this.onerror=null; this.src='favicon.ico'">
+        <span>DevEN</span>
+      </a>
+      <div class="gh-breadcrumb">
+        <span>/</span>
+        <a href="#overview" onclick="switchTab('overview')">docs</a>
+        <span>/</span>
+        <span id="breadcrumb-current">api-reference</span>
+      </div>
+      <span class="gh-badge gh-badge-blue">v1.0.0</span>
+      <span class="gh-badge gh-badge-success">100 Bus Free</span>
+    </div>
+
+    <div class="gh-header-right">
+      <input type="text" id="apiSearch" class="gh-search-input" placeholder="Search API..." onkeyup="filterSidebar(this.value)">
+      <a href="https://github.com/deven-ps/deven/releases" target="_blank" rel="noopener noreferrer" class="gh-btn" title="Download Standalone DevEN Executable (.exe)">
+        <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14H2.75Zm4.5-3.47 2.22-2.22a.75.75 0 1 1 1.06 1.06l-3.5 3.5a.75.75 0 0 1-1.06 0l-3.5-3.5a.75.75 0 1 1 1.06-1.06l2.22 2.22V1.75a.75.75 0 0 1 1.5 0v8.78Z"/></svg>
+        <span>EXE</span>
+      </a>
+      <a href="mailto:devarajedeva2002@gmail.com" class="gh-btn" title="Commercial License Inquiry: devarajedeva2002@gmail.com">
+        <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-7.581-6.19 3.714a.25.25 0 0 1-.253 0L1.868 4.67H14.5Z"/></svg>
+        <span>License</span>
+      </a>
+      <button class="gh-btn gh-btn-primary" onclick="switchTab('quickstart')">Quickstart</button>
+      <a href="https://github.com/deven-ps/deven" target="_blank" rel="noopener noreferrer" class="gh-btn gh-btn-icon" title="GitHub: deven-ps/deven">
+        <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+      </a>
+      <a href="https://deven-ps.github.io/DevEN/" target="_blank" rel="noopener noreferrer" class="gh-btn gh-btn-icon" title="DevEN Web (https://deven-ps.github.io/DevEN/)">
+        <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.5 8a6.5 6.5 0 0 1 1.03-3.5h2.22c-.15 1.13-.25 2.3-.25 3.5s.1 2.37.25 3.5H2.53A6.5 6.5 0 0 1 1.5 8Zm3.72 0c0-1.16.09-2.32.24-3.5h5.08c.15 1.18.24 2.34.24 3.5s-.09 2.32-.24 3.5H5.46c-.15-1.18-.24-2.34-.24-3.5Zm.49-5h4.58c-.56-1.17-1.35-2.02-2.29-2.02-.94 0-1.73.85-2.29 2.02Zm0 10c.56 1.17 1.35 2.02 2.29 2.02.94 0 1.73-.85 2.29-2.02H5.71Zm5.79 0c.15-1.13.25-2.3.25-3.5s-.1-2.37-.25-3.5h2.22a6.5 6.5 0 0 1 0 7h-2.22Zm-.38-8.5c-.71-1.39-1.7-2.39-2.87-2.73 1.25.42 2.3 1.38 2.87 2.73Zm-6.5 0c.57-1.35 1.62-2.31 2.87-2.73-1.17.34-2.16 1.34-2.87 2.73Zm0 7c.71 1.39 1.7 2.39 2.87 2.73-1.25-.42-2.3-1.38-2.87-2.73Zm6.5 0c-.57 1.35-1.62 2.31-2.87 2.73 1.17-.34 2.16-1.34 2.87-2.73Z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="gh-container">
+    <!-- Left Sidebar (Side Tabs for Studies & APIs) -->
+    <aside class="gh-sidebar">
+      <div class="sidebar-section-title">Getting Started</div>
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link active" data-tab="overview" onclick="switchTab('overview')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25Z"/></svg>
+            <span>Overview & Architecture</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="quickstart" onclick="switchTab('quickstart')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"/><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"/></svg>
+            <span>Quickstart (60 Seconds)</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-section-title">Core Studies API</div>
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="lfa" onclick="switchTab('lfa')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 2a.75.75 0 0 1 .75.75v4.5h2.5a.75.75 0 0 1 .53 1.28l-4.5 4.5a.75.75 0 0 1-1.28-.53v-4.5H1.5A.75.75 0 0 1 .97 6.72l4.5-4.5A.75.75 0 0 1 6 2Z"/></svg>
+            <span>1. Load Flow (LFA)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="scs" onclick="switchTab('scs')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8.75 1.5a.75.75 0 0 0-1.5 0v5.69L3.71 4.22a.75.75 0 1 0-.92 1.18l4.23 3.3-4.23 3.3a.75.75 0 1 0 .92 1.18l3.54-2.97v5.69a.75.75 0 0 0 1.5 0v-5.69l3.54 2.97a.75.75 0 0 0 .92-1.18l-4.23-3.3 4.23-3.3a.75.75 0 0 0-.92-1.18L8.75 7.19V1.5Z"/></svg>
+            <span>2. Short Circuit (SCS)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="ca" onclick="switchTab('ca')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M7.47 10.78a.75.75 0 0 0 1.06 0l3.75-3.75a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75a.75.75 0 0 0-1.5 0v6.69L4.78 5.97a.75.75 0 0 0-1.06 1.06l3.75 3.75Zm-5.72 2.47a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5H1.75Z"/></svg>
+            <span>3. Contingency (CA - N-1)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="ts" onclick="switchTab('ts')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v3.5l2.5 1.5a.75.75 0 1 1-.76 1.3l-2.99-1.8A.75.75 0 0 1 7 8.5v-3.75a.75.75 0 0 1 1.5 0Z"/></svg>
+            <span>4. Time-Series (TS-LFA)</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-section-title">Ecosystem & Tools</div>
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="converters" onclick="switchTab('converters')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M5.22 14.78a.75.75 0 0 0 1.06-1.06L4.56 12h8.69a.75.75 0 0 0 0-1.5H4.56l1.72-1.72a.75.75 0 0 0-1.06-1.06l-3 3a.75.75 0 0 0 0 1.06l3 3Zm5.56-6.56a.75.75 0 1 0 1.06-1.06L10.12 5.44l1.72-1.72a.75.75 0 0 0-1.06-1.06l-3 3a.75.75 0 0 0 0 1.06l3 3h.01l1.05 1.06Z"/></svg>
+            <span>File Converters (.raw, .dgs...)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="modeling" onclick="switchTab('modeling')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M1.5 1.75V13.5h13.75a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1-.75-.75V1.75a.75.75 0 0 1 1.5 0Zm14.28 2.53-5.25 5.25a.75.75 0 0 1-1.06 0L7 7.06 4.28 9.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.25-3.25a.75.75 0 0 1 1.06 0L10 7.94l4.72-4.72a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"/></svg>
+            <span>Network CRUD & Modeling</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="licensing" onclick="switchTab('licensing')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A1.75 1.75 0 1 1 8.25 6H10a.75.75 0 0 1 0 1.5H8.75A1.75 1.75 0 0 1 6.5 7.75Z"/></svg>
+            <span>Free Tier & Licensing (.pyd)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class="sidebar-nav-link" data-tab="cli" onclick="switchTab('cli')">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25Zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25ZM3.22 4.97a.75.75 0 0 1 1.06 0l2.5 2.5a.75.75 0 0 1 0 1.06l-2.5 2.5a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L5.19 8 3.22 6.03a.75.75 0 0 1 0-1.06Zm4.53 5.78h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5Z"/></svg>
+            <span>CLI Reference (`deven --help`)</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Documentation Content -->
+    <main class="gh-content">
+
+      <!-- ====================================================================
+           TAB 1: OVERVIEW & ARCHITECTURE
+           ==================================================================== -->
+      <section id="tab-overview" class="tab-content active">
+        <h1 class="gh-title">
+          <img src="logo.png" alt="DevEN" height="32" style="vertical-align: middle; border-radius: 6px;" onerror="this.onerror=null; this.src='favicon.ico'">
+          DevEN Power System Simulation Platform
+        </h1>
+
+        <p>
+          <strong>DevEN</strong> is an ultra-high performance, scriptable electric power grid simulation and analytics framework. Built with native C/C++ compiled mathematical kernels (<code>.pyd</code>) and an intuitive Python API, DevEN delivers lightning-fast computation for transmission, distribution, and industrial networks.
+        </p>
+
+        <div class="gh-alert gh-alert-tip">
+          <div class="gh-alert-title">
+            <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm9 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-.25-6.25a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 1.5 0v-3.5Z"/></svg>
+            100 Bus Free Tier Included
+          </div>
+          <div>
+            Every DevEN distribution comes with an automatic <strong>100 Bus Free Tier</strong> (mathematically supporting networks up to <strong>101 buses</strong> without any license file). You can run all 4 analytical studies immediately with zero configuration!
+          </div>
+        </div>
+
+        <h2 class="gh-section-title">The 4 Core Analytical Studies</h2>
+        <div class="gh-cards-grid">
+          <div class="gh-card" onclick="switchTab('lfa')">
+            <div class="gh-card-title">⚡ 1. Load Flow (LFA)</div>
+            <div class="gh-card-desc">High-speed AC power flow solving complex voltages, generator dispatch, branch power flows, losses, and reactive power limits.</div>
+          </div>
+          <div class="gh-card" onclick="switchTab('scs')">
+            <div class="gh-card-title">💥 2. Short Circuit (SCS)</div>
+            <div class="gh-card-desc">IEC 60909 / ANSI compliant fault study computing subtransient ($I_k''$), peak ($i_p$), breaking ($I_b$), and thermal equivalent currents.</div>
+          </div>
+          <div class="gh-card" onclick="switchTab('ca')">
+            <div class="gh-card-title">🛡️ 3. Contingency Analysis (CA)</div>
+            <div class="gh-card-desc">Exhaustive N-1 and N-2 transmission line & transformer outage screening with automated topology islanding detection and severity ranking.</div>
+          </div>
+          <div class="gh-card" onclick="switchTab('ts')">
+            <div class="gh-card-title">⏱️ 4. Time-Series (TS-LFA)</div>
+            <div class="gh-card-desc">Quasi-Static Time Series (QSTS) multi-period chronological simulation tracking renewable solar/wind generation and load diurnal profiles.</div>
+          </div>
+        </div>
+
+        <h2 class="gh-section-title">Supported Case File Formats</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Extension</th>
+              <th>Format Name</th>
+              <th>Description</th>
+              <th>Ingestion Support</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.raw</code></td>
+              <td>PSS/E Power Flow Raw</td>
+              <td>Industry standard raw text format versions 30 through 35.</td>
+              <td>Full Bi-directional</td>
+            </tr>
+            <tr>
+              <td><code>.dgs</code></td>
+              <td>PowerFactory XML/DGS</td>
+              <td>Native grid model exchange files containing topologies, lines, transformers.</td>
+              <td>Full Bi-directional</td>
+            </tr>
+            <tr>
+              <td><code>.dat</code></td>
+              <td>IEEE Common Data Format (CDF)</td>
+              <td>Standard card-column format used across IEEE 14, 30, 57, 118, 300 test cases.</td>
+              <td>Full Ingestion</td>
+            </tr>
+            <tr>
+              <td><code>.py</code></td>
+              <td>Python Network Definition</td>
+              <td>Programmatic grid models defined in clean, readable Python code.</td>
+              <td>Native Execution</td>
+            </tr>
+            <tr>
+              <td><code>.sql</code> / <code>.db</code></td>
+              <td>DevEN SQLite Grid DB</td>
+              <td>High-concurrency relational database storage for enterprise power systems.</td>
+              <td>Native Database</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ====================================================================
+           TAB 2: QUICKSTART
+           ==================================================================== -->
+      <section id="tab-quickstart" class="tab-content">
+        <h1 class="gh-title">Quickstart (60 Seconds)</h1>
+        <p>Get up and running with DevEN in under a minute with Python 3.9 through 3.14.</p>
+
+        <h2 class="gh-section-title">Installation</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Terminal</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">pip</span> install deven</pre>
+        </div>
+
+        <h2 class="gh-section-title">Complete 4-in-1 Script Example</h2>
+        <p>Save the following script as <code>run_grid.py</code> and execute it with Python:</p>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>run_grid.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+<span class="hl-com"># 1. Initialize session and load a power grid case</span>
+sess = deven.DevENSession()
+sess.load_case(<span class="hl-str">"cases/IEEE14BUS.py"</span>)  <span class="hl-com"># or .raw, .dgs, .dat</span>
+
+<span class="hl-com"># 2. Study 1: Run Newton-Raphson Load Flow</span>
+res_lfa = sess.run_lfa(method=<span class="hl-str">"nr"</span>, tol=<span class="hl-num">1e-6</span>)
+print(<span class="hl-str">f"LFA Converged: {res_lfa['converged']} in {res_lfa['iterations']} iterations"</span>)
+
+<span class="hl-com"># 3. Study 2: Run IEC 60909 Short Circuit at Bus 2</span>
+res_scs = sess.run_scs(fault_bus=<span class="hl-num">2</span>, fault_type=<span class="hl-str">"3phase"</span>)
+print(<span class="hl-str">f"Fault Current at Bus 2: {res_scs['fault_current_ka']:.2f} kA"</span>)
+
+<span class="hl-com"># 4. Study 3: Run N-1 Contingency Analysis</span>
+res_ca = sess.run_ca(scope=<span class="hl-str">"all_lines"</span>)
+print(<span class="hl-str">f"Contingencies Evaluated: {len(res_ca['contingencies'])}"</span>)
+
+<span class="hl-com"># 5. Study 4: Run 24-Hour Time Series Simulation</span>
+res_ts = sess.run_timeseries(steps=<span class="hl-num">24</span>)
+print(<span class="hl-str">f"Time-Series Total Energy Loss: {res_ts.get('total_loss_mwh', 0.0):.2f} MWh"</span>)
+</pre>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 3: LOAD FLOW ANALYSIS (LFA)
+           ==================================================================== -->
+      <section id="tab-lfa" class="tab-content">
+        <h1 class="gh-title">
+          <svg height="30" viewBox="0 0 16 16" width="30" fill="#2f81f7"><path d="M6 2a.75.75 0 0 1 .75.75v4.5h2.5a.75.75 0 0 1 .53 1.28l-4.5 4.5a.75.75 0 0 1-1.28-.53v-4.5H1.5A.75.75 0 0 1 .97 6.72l4.5-4.5A.75.75 0 0 1 6 2Z"/></svg>
+          Load Flow Analysis (LFA) API
+        </h1>
+        <p>
+          The Load Flow Analysis (LFA) engine computes the steady-state operating point of the AC power system. It calculates complex bus voltages ($V_i, \theta_i$), active and reactive branch power flows ($P_{ij}, Q_{ij}$), real power losses ($P_{loss}$), and generator reactive power dispatch ($Q_g$) under operational generator constraints.
+        </p>
+
+        <h2 class="gh-section-title">Method Signature</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Python Signature</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-fn">sess.run_lfa</span>(
+    method: <span class="hl-kw">str</span> = <span class="hl-str">"nr"</span>,
+    tol: <span class="hl-kw">float</span> = <span class="hl-num">1e-6</span>,
+    max_iter: <span class="hl-kw">int</span> = <span class="hl-num">20</span>,
+    v_init: <span class="hl-kw">str</span> = <span class="hl-str">"flat"</span>,
+    export_csv: <span class="hl-kw">Optional</span>[<span class="hl-kw">str</span>] = <span class="hl-kw">None</span>,
+    enforce_q_limits: <span class="hl-kw">bool</span> = <span class="hl-kw">True</span>
+) -> <span class="hl-kw">Dict</span>[<span class="hl-kw">str</span>, <span class="hl-kw">Any</span>]</pre>
+        </div>
+
+        <h2 class="gh-section-title">Parameters & Options</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>method</code></td>
+              <td><code>str</code></td>
+              <td><code>"nr"</code></td>
+              <td>Solver algorithm: <code>"nr"</code> (Full Newton-Raphson), <code>"fdlf"</code> (Fast Decoupled XB/BX), or <code>"gs"</code> (Gauss-Seidel).</td>
+            </tr>
+            <tr>
+              <td><code>tol</code></td>
+              <td><code>float</code></td>
+              <td><code>1e-6</code></td>
+              <td>Convergence tolerance for active and reactive power mismatch ($\Delta P, \Delta Q$) in p.u.</td>
+            </tr>
+            <tr>
+              <td><code>max_iter</code></td>
+              <td><code>int</code></td>
+              <td><code>20</code></td>
+              <td>Maximum allowed iterations before aborting solver.</td>
+            </tr>
+            <tr>
+              <td><code>v_init</code></td>
+              <td><code>str</code></td>
+              <td><code>"flat"</code></td>
+              <td>Voltage flat start configuration (<code>"flat"</code> sets 1.0 p.u. 0°, <code>"previous"</code> uses existing solution).</td>
+            </tr>
+            <tr>
+              <td><code>enforce_q_limits</code></td>
+              <td><code>bool</code></td>
+              <td><code>True</code></td>
+              <td>Enforces generator reactive power bounds ($Q_{min} \le Q_g \le Q_{max}$), converting PV buses to PQ when violated.</td>
+            </tr>
+            <tr>
+              <td><code>export_csv</code></td>
+              <td><code>str | None</code></td>
+              <td><code>None</code></td>
+              <td>Optional path to export solved bus and branch tables as formatted CSV files.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="gh-section-title">Return Dictionary Schema</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>"converged"</code></td>
+              <td><code>bool</code></td>
+              <td><code>True</code> if the solver achieved mismatch lower than <code>tol</code>; <code>False</code> otherwise.</td>
+            </tr>
+            <tr>
+              <td><code>"iterations"</code></td>
+              <td><code>int</code></td>
+              <td>Number of iterations executed to reach convergence.</td>
+            </tr>
+            <tr>
+              <td><code>"time_sec"</code></td>
+              <td><code>float</code></td>
+              <td>Total wall-clock execution time in seconds.</td>
+            </tr>
+            <tr>
+              <td><code>"buses"</code></td>
+              <td><code>dict</code></td>
+              <td>Dictionary keyed by <code>bus_id</code> with <code>v_pu</code>, <code>angle_deg</code>, <code>p_gen</code>, <code>q_gen</code>, <code>p_load</code>, <code>q_load</code>.</td>
+            </tr>
+            <tr>
+              <td><code>"branches"</code></td>
+              <td><code>dict</code></td>
+              <td>Dictionary keyed by <code>branch_id</code> with <code>p_fwd</code>, <code>q_fwd</code>, <code>p_rev</code>, <code>q_rev</code>, <code>losses_mw</code>, <code>loading_pct</code>.</td>
+            </tr>
+            <tr>
+              <td><code>"summary"</code></td>
+              <td><code>dict</code></td>
+              <td>System totals: <code>total_gen_p</code>, <code>total_gen_q</code>, <code>total_load_p</code>, <code>total_load_q</code>, <code>total_loss_p</code>, <code>total_loss_q</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="gh-section-title">Code Example</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>run_lfa_example.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+sess = deven.DevENSession()
+sess.load_case(<span class="hl-str">"cases/IEEE14BUS.py"</span>)
+
+<span class="hl-com"># Execute Newton-Raphson Load Flow</span>
+res = sess.run_lfa(method=<span class="hl-str">"nr"</span>, tol=<span class="hl-num">1e-6</span>, max_iter=<span class="hl-num">20</span>)
+
+<span class="hl-kw">if</span> res[<span class="hl-str">"converged"</span>]:
+    print(<span class="hl-str">f"Solved in {res['iterations']} iterations ({res['time_sec']:.4f}s)"</span>)
+    <span class="hl-kw">for</span> bus_id, b <span class="hl-kw">in</span> res[<span class="hl-str">"buses"</span>].items():
+        print(<span class="hl-str">f"Bus {bus_id:2d}: V = {b['v_pu']:.4f} p.u. | Angle = {b['angle_deg']:+6.2f}°"</span>)
+</pre>
+        </div>
+
+        <h3 class="gh-sub-title">Terminal Output Sample</h3>
+        <div class="gh-code-block">
+          <pre class="gh-terminal">================================================================================
+[*] DevEN LOAD FLOW ANALYSIS (Newton-Raphson)
+================================================================================
+Iteration  1: Max P Mismatch = 0.15842 p.u. | Max Q Mismatch = 0.08921 p.u.
+Iteration  2: Max P Mismatch = 0.01243 p.u. | Max Q Mismatch = 0.00712 p.u.
+Iteration  3: Max P Mismatch = 0.00008 p.u. | Max Q Mismatch = 0.00003 p.u.
+Iteration  4: Max P Mismatch = 0.00000 p.u. | Max Q Mismatch = 0.00000 p.u.
+[+] Converged in 4 iterations! (Elapsed time: 0.0028s)
+--------------------------------------------------------------------------------
+Total Generation : 259.00 MW  |  73.50 MVAr
+Total Load       : 250.00 MW  |  73.50 MVAr
+Active Losses    :   9.00 MW  |   3.47 %
+================================================================================</pre>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 4: SHORT CIRCUIT STUDIES (SCS)
+           ==================================================================== -->
+      <section id="tab-scs" class="tab-content">
+        <h1 class="gh-title">
+          <svg height="30" viewBox="0 0 16 16" width="30" fill="#2f81f7"><path d="M8.75 1.5a.75.75 0 0 0-1.5 0v5.69L3.71 4.22a.75.75 0 1 0-.92 1.18l4.23 3.3-4.23 3.3a.75.75 0 1 0 .92 1.18l3.54-2.97v5.69a.75.75 0 0 0 1.5 0v-5.69l3.54 2.97a.75.75 0 0 0 .92-1.18l-4.23-3.3 4.23-3.3a.75.75 0 0 0-.92-1.18L8.75 7.19V1.5Z"/></svg>
+          Short Circuit Studies (SCS) API
+        </h1>
+        <p>
+          The Short Circuit Study (SCS) solver implements rigorous fault calculations compliant with international standard <strong>IEC 60909</strong> / <strong>VDE 0102</strong> and ANSI/IEEE standards. It constructs positive, negative, and zero sequence impedance matrices ($Z^{(1)}, Z^{(2)}, Z^{(0)}$) to evaluate symmetrical and asymmetrical faults.
+        </p>
+
+        <h2 class="gh-section-title">Method Signature</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Python Signature</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-fn">sess.run_scs</span>(
+    fault_bus: <span class="hl-kw">Optional</span>[<span class="hl-kw">Union</span>[<span class="hl-kw">int</span>, <span class="hl-kw">str</span>]] = <span class="hl-kw">None</span>,
+    method: <span class="hl-kw">str</span> = <span class="hl-str">"iec"</span>,
+    fault_type: <span class="hl-kw">str</span> = <span class="hl-str">"3phase"</span>,
+    c_factor: <span class="hl-kw">float</span> = <span class="hl-num">1.05</span>,
+    duration_s: <span class="hl-kw">float</span> = <span class="hl-num">0.1</span>,
+    export_csv: <span class="hl-kw">Optional</span>[<span class="hl-kw">str</span>] = <span class="hl-kw">None</span>,
+    scope: <span class="hl-kw">str</span> = <span class="hl-str">"all_buses"</span>
+) -> <span class="hl-kw">Dict</span>[<span class="hl-kw">str</span>, <span class="hl-kw">Any</span>]</pre>
+        </div>
+
+        <h2 class="gh-section-title">Parameters & Options</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fault_bus</code></td>
+              <td><code>int | str | None</code></td>
+              <td><code>None</code></td>
+              <td>Specific target bus for fault application. If <code>None</code> and <code>scope="all_buses"</code>, runs batch faults across all buses.</td>
+            </tr>
+            <tr>
+              <td><code>method</code></td>
+              <td><code>str</code></td>
+              <td><code>"iec"</code></td>
+              <td>Standard calculation method: <code>"iec"</code> (IEC 60909 equivalent voltage source) or <code>"complete"</code> (superposition).</td>
+            </tr>
+            <tr>
+              <td><code>fault_type</code></td>
+              <td><code>str</code></td>
+              <td><code>"3phase"</code></td>
+              <td>Fault type: <code>"3phase"</code> (symmetrical three-phase), <code>"1phase"</code> / <code>"lg"</code> (single line-to-ground), <code>"ll"</code> (line-to-line), <code>"llg"</code> (double line-to-ground).</td>
+            </tr>
+            <tr>
+              <td><code>c_factor</code></td>
+              <td><code>float</code></td>
+              <td><code>1.05</code></td>
+              <td>Voltage factor $c$: <code>1.05</code> or <code>1.10</code> for maximum short-circuit currents per IEC 60909 Table 1.</td>
+            </tr>
+            <tr>
+              <td><code>duration_s</code></td>
+              <td><code>float</code></td>
+              <td><code>0.1</code></td>
+              <td>Fault clearing duration in seconds for thermal equivalent current ($I_{th}$) calculation.</td>
+            </tr>
+            <tr>
+              <td><code>scope</code></td>
+              <td><code>str</code></td>
+              <td><code>"all_buses"</code></td>
+              <td>Batch scope: <code>"all_buses"</code> or <code>"single"</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="gh-section-title">Calculated Short-Circuit Quantities</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Quantity Name</th>
+              <th>Engineering Significance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$I_k''$</td>
+              <td>Initial Symmetrical Short-Circuit Current</td>
+              <td>Determines RMS fault level at $t = 0$ for protective relay pickup and equipment breaking duty.</td>
+            </tr>
+            <tr>
+              <td>$i_p$</td>
+              <td>Peak Asymmetrical Current</td>
+              <td>Highest instantaneous current peak ($kA$) governing dynamic electromechanical stress on busbars and switchgear.</td>
+            </tr>
+            <tr>
+              <td>$I_b$</td>
+              <td>Symmetrical Breaking Current</td>
+              <td>RMS AC component at circuit breaker contact separation time ($t_{min}$).</td>
+            </tr>
+            <tr>
+              <td>$I_{th}$</td>
+              <td>Thermal Equivalent Current</td>
+              <td>Effective joule-heating current ($kA$) governing conductor thermal withstand sizing.</td>
+            </tr>
+            <tr>
+              <td>$S_k''$</td>
+              <td>Initial Fault MVA</td>
+              <td>Total three-phase short-circuit power level ($MVA$) at the substation bus.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="gh-section-title">Code Example</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>run_scs_example.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+sess = deven.DevENSession()
+sess.load_case(<span class="hl-str">"cases/IEEE14BUS.py"</span>)
+
+<span class="hl-com"># Run three-phase short-circuit analysis at Bus 1</span>
+res = sess.run_scs(fault_bus=<span class="hl-num">1</span>, fault_type=<span class="hl-str">"3phase"</span>, c_factor=<span class="hl-num">1.05</span>)
+
+print(<span class="hl-str">f"Fault Bus: {res['fault_bus']}"</span>)
+print(<span class="hl-str">f"Initial Current (Ik'') : {res['fault_current_ka']:.3f} kA"</span>)
+print(<span class="hl-str">f"Peak Current (ip)       : {res['peak_current_ka']:.3f} kA"</span>)
+print(<span class="hl-str">f"Breaking Current (Ib)   : {res['breaking_current_ka']:.3f} kA"</span>)
+print(<span class="hl-str">f"Fault Power (Sk'')      : {res['fault_power_mva']:.2f} MVA"</span>)
+</pre>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 5: CONTINGENCY ANALYSIS (CA)
+           ==================================================================== -->
+      <section id="tab-ca" class="tab-content">
+        <h1 class="gh-title">
+          <svg height="30" viewBox="0 0 16 16" width="30" fill="#2f81f7"><path d="M7.47 10.78a.75.75 0 0 0 1.06 0l3.75-3.75a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75a.75.75 0 0 0-1.5 0v6.69L4.78 5.97a.75.75 0 0 0-1.06 1.06l3.75 3.75Zm-5.72 2.47a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5H1.75Z"/></svg>
+          Contingency Analysis (CA - N-1 / N-2) API
+        </h1>
+        <p>
+          The Contingency Analysis (CA) engine automates bulk $N-1$ and $N-2$ transmission line and transformer trip screening. It features high-speed graph topological island detection, solves post-contingency AC power flows, identifies cascading thermal overloads, and computes voltage severity ranking indices ($PI$).
+        </p>
+
+        <h2 class="gh-section-title">Method Signature</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Python Signature</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-fn">sess.run_ca</span>(
+    scope: <span class="hl-kw">str</span> = <span class="hl-str">"all_lines"</span>,
+    rank_by: <span class="hl-kw">str</span> = <span class="hl-str">"overload"</span>,
+    max_loading: <span class="hl-kw">float</span> = <span class="hl-num">100.0</span>,
+    export_csv: <span class="hl-kw">Optional</span>[<span class="hl-kw">str</span>] = <span class="hl-kw">None</span>,
+    n_threads: <span class="hl-kw">int</span> = <span class="hl-num">1</span>
+) -> <span class="hl-kw">Dict</span>[<span class="hl-kw">str</span>, <span class="hl-kw">Any</span>]</pre>
+        </div>
+
+        <h2 class="gh-section-title">Parameters & Options</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>scope</code></td>
+              <td><code>str</code></td>
+              <td><code>"all_lines"</code></td>
+              <td>Elements to trip: <code>"all_lines"</code>, <code>"all_transformers"</code>, or <code>"all_branches"</code>.</td>
+            </tr>
+            <tr>
+              <td><code>rank_by</code></td>
+              <td><code>str</code></td>
+              <td><code>"overload"</code></td>
+              <td>Ranking metric: <code>"overload"</code> (highest branch thermal %), <code>"pi"</code> (Performance Index), or <code>"voltage_drop"</code>.</td>
+            </tr>
+            <tr>
+              <td><code>max_loading</code></td>
+              <td><code>float</code></td>
+              <td><code>100.0</code></td>
+              <td>Thermal loading threshold percentage to flag an overload violation.</td>
+            </tr>
+            <tr>
+              <td><code>n_threads</code></td>
+              <td><code>int</code></td>
+              <td><code>1</code></td>
+              <td>Number of parallel worker threads for parallel multi-core contingency screening.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="gh-section-title">Code Example</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>run_ca_example.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+sess = deven.DevENSession()
+sess.load_case(<span class="hl-str">"cases/IEEE14BUS.py"</span>)
+
+<span class="hl-com"># Run N-1 screening across all transmission branches</span>
+ca_res = sess.run_ca(scope=<span class="hl-str">"all_lines"</span>, max_loading=<span class="hl-num">100.0</span>)
+
+print(<span class="hl-str">f"Scanned {len(ca_res['contingencies'])} outage cases."</span>)
+<span class="hl-kw">for</span> item <span class="hl-kw">in</span> ca_res[<span class="hl-str">"worst_contingencies"</span>][:5]:
+    print(<span class="hl-str">f"Outage [{item['tripped_element']}]: Max Loading = {item['max_loading_pct']:.1f}% on Line {item['overloaded_branch']}"</span>)
+</pre>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 6: TIME-SERIES LOAD FLOW (TS-LFA)
+           ==================================================================== -->
+      <section id="tab-ts" class="tab-content">
+        <h1 class="gh-title">
+          <svg height="30" viewBox="0 0 16 16" width="30" fill="#2f81f7"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v3.5l2.5 1.5a.75.75 0 1 1-.76 1.3l-2.99-1.8A.75.75 0 0 1 7 8.5v-3.75a.75.75 0 0 1 1.5 0Z"/></svg>
+          Time-Series Load Flow (TS-LFA) API
+        </h1>
+        <p>
+          The Time-Series simulation engine performs chronological Quasi-Static Time Series (QSTS) simulations. It computes sequential AC power flows across user-defined time steps (hourly, 15-minute, or 1-minute intervals), tracking solar PV and wind generation variability, load demand diurnal profiles, and total system energy losses ($MWh$).
+        </p>
+
+        <h2 class="gh-section-title">Method Signature</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Python Signature</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-fn">sess.run_timeseries</span>(
+    steps: <span class="hl-kw">int</span> = <span class="hl-num">24</span>,
+    step_size_s: <span class="hl-kw">float</span> = <span class="hl-num">3600.0</span>,
+    profiles: <span class="hl-kw">Optional</span>[<span class="hl-kw">Dict</span>[<span class="hl-kw">str</span>, <span class="hl-kw">Any</span>]] = <span class="hl-kw">None</span>,
+    export_csv: <span class="hl-kw">Optional</span>[<span class="hl-kw">str</span>] = <span class="hl-kw">None</span>,
+    progress_bar: <span class="hl-kw">bool</span> = <span class="hl-kw">True</span>
+) -> <span class="hl-kw">Dict</span>[<span class="hl-kw">str</span>, <span class="hl-kw">Any</span>]</pre>
+        </div>
+
+        <h2 class="gh-section-title">Parameters & Options</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>steps</code></td>
+              <td><code>int</code></td>
+              <td><code>24</code></td>
+              <td>Total number of simulation time intervals to execute.</td>
+            </tr>
+            <tr>
+              <td><code>step_size_s</code></td>
+              <td><code>float</code></td>
+              <td><code>3600.0</code></td>
+              <td>Step duration in seconds (3600.0 = 1 hour, 900.0 = 15 minutes, 60.0 = 1 minute).</td>
+            </tr>
+            <tr>
+              <td><code>profiles</code></td>
+              <td><code>dict | None</code></td>
+              <td><code>None</code></td>
+              <td>Profile multipliers for loads and renewables. Keyed by element or system-wide array.</td>
+            </tr>
+            <tr>
+              <td><code>export_csv</code></td>
+              <td><code>str | None</code></td>
+              <td><code>None</code></td>
+              <td>Path to export time-series profile results table in CSV format.</td>
+            </tr>
+            <tr>
+              <td><code>progress_bar</code></td>
+              <td><code>bool</code></td>
+              <td><code>True</code></td>
+              <td>Displays an interactive ASCII progress bar during multi-period solving.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="gh-section-title">Code Example</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>run_ts_example.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+sess = deven.DevENSession()
+sess.load_case(<span class="hl-str">"cases/IEEE14BUS.py"</span>)
+
+<span class="hl-com"># Execute 24-step chronological power flow</span>
+ts_res = sess.run_timeseries(steps=<span class="hl-num">24</span>, step_size_s=<span class="hl-num">3600.0</span>)
+
+print(<span class="hl-str">f"All 24 steps converged: {all(s['converged'] for s in ts_res['steps'])}"</span>)
+print(<span class="hl-str">f"Total Active Energy Loss : {ts_res['total_loss_mwh']:.2f} MWh"</span>)
+print(<span class="hl-str">f"Peak Power Loss          : {ts_res['peak_loss_mw']:.2f} MW"</span>)
+</pre>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 7: FILE CONVERTERS & INGESTION
+           ==================================================================== -->
+      <section id="tab-converters" class="tab-content">
+        <h1 class="gh-title">File Ingestion & Converters</h1>
+        <p>
+          DevEN includes native high-performance C/C++ parsers capable of ingesting raw data files from all legacy and standard power engineering file formats.
+        </p>
+
+        <h2 class="gh-section-title">Universal File Loader API</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Python Signature</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-com"># Automatically identifies format from file header & extension:</span>
+grid = deven.load_network(<span class="hl-str">"substation_case.raw"</span>)
+<span class="hl-com"># or via DevENSession</span>
+sess.load_case(<span class="hl-str">"substation_case.dgs"</span>)
+</pre>
+        </div>
+
+        <h2 class="gh-section-title">Supported File Formats Details</h2>
+        <table class="gh-table">
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>Extension</th>
+              <th>Parsed Elements</th>
+              <th>Converter Module</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PSS/E Raw</td>
+              <td><code>.raw</code></td>
+              <td>Buses, Loads, Fixed Shunts, Generators, Branches, Transformers, Areas, Two-terminal DC lines, VSC DC lines, Switched Shunts.</td>
+              <td><code>deven.engines.raw_converter</code> (Compiled .pyd)</td>
+            </tr>
+            <tr>
+              <td>PowerFactory DGS</td>
+              <td><code>.dgs</code></td>
+              <td>ElmTerm, ElmLne, ElmTr2, ElmGenstat, ElmSym, ElmLod, TypLne, TypTr2.</td>
+              <td><code>deven.engines.powerfactory_converter</code> (Compiled .pyd)</td>
+            </tr>
+            <tr>
+              <td>IEEE Common Data</td>
+              <td><code>.dat</code></td>
+              <td>Title, Bus Data, Branch Data, Loss Zones, Interchange Data, Tie Lines.</td>
+              <td><code>deven.engines.dat_converter</code> (Compiled .pyd)</td>
+            </tr>
+            <tr>
+              <td>Python Network</td>
+              <td><code>.py</code></td>
+              <td>Standard pure Python dictionary declarations with bus, line, xfmr, gen, load models.</td>
+              <td><code>deven.core.io</code></td>
+            </tr>
+            <tr>
+              <td>DevEN SQLite</td>
+              <td><code>.sql</code>, <code>.db</code></td>
+              <td>Full relational SQLite schema storing all network elements with revision tracking.</td>
+              <td><code>deven.core.io</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ====================================================================
+           TAB 8: NETWORK MODELING & CRUD
+           ==================================================================== -->
+      <section id="tab-modeling" class="tab-content">
+        <h1 class="gh-title">Network Modeling & CRUD Operations</h1>
+        <p>
+          DevEN provides programmatic control to build power grids from scratch, clone existing components, modify operating points, or dynamically add renewable energy sources.
+        </p>
+
+        <h2 class="gh-section-title">Element Creation API</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>build_grid.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+sess = deven.DevENSession()
+sess.new_case(name=<span class="hl-str">"Microgrid"</span>, base_mva=<span class="hl-num">100.0</span>)
+
+<span class="hl-com"># Add Substation Bus (Type 3 = Slack / Swing Bus)</span>
+sess.add_bus(bus_id=<span class="hl-num">1</span>, name=<span class="hl-str">"Grid_Infeed"</span>, base_kv=<span class="hl-num">132.0</span>, type=<span class="hl-num">3</span>)
+
+<span class="hl-com"># Add Distribution Bus (Type 1 = PQ Load Bus)</span>
+sess.add_bus(bus_id=<span class="hl-num">2</span>, name=<span class="hl-str">"Industrial_Park"</span>, base_kv=<span class="hl-num">33.0</span>, type=<span class="hl-num">1</span>)
+
+<span class="hl-com"># Add Step-down Transformer 132/33 kV</span>
+sess.add_transformer(xfmr_id=<span class="hl-num">1</span>, from_bus=<span class="hl-num">1</span>, to_bus=<span class="hl-num">2</span>, r=<span class="hl-num">0.002</span>, x=<span class="hl-num">0.08</span>, rateA=<span class="hl-num">80.0</span>)
+
+<span class="hl-com"># Add Heavy Industrial Load</span>
+sess.add_load(load_id=<span class="hl-num">1</span>, bus=<span class="hl-num">2</span>, P_demand=<span class="hl-num">45.0</span>, Q_demand=<span class="hl-num">15.0</span>)
+
+<span class="hl-com"># Solve Grid</span>
+res = sess.run_lfa()
+print(<span class="hl-str">f"Solved! Voltage at Bus 2: {sess.get_bus_voltage(2)[0]:.4f} p.u."</span>)
+</pre>
+        </div>
+
+        <h2 class="gh-section-title">Element Modification & Queries</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>queries.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-com"># Update line rating or status</span>
+sess.set_line(line_id=<span class="hl-num">12</span>, rateA=<span class="hl-num">250.0</span>, status=<span class="hl-num">1</span>)
+
+<span class="hl-com"># Query line flow and loading</span>
+flow = sess.get_line_flows(line_id=<span class="hl-num">12</span>)
+print(<span class="hl-str">f"P = {flow['p_fwd']} MW | Loading = {flow['loading_pct']}%"</span>)
+
+<span class="hl-com"># Check voltage and thermal violations across entire network</span>
+viols = sess.get_violations(v_min=<span class="hl-num">0.95</span>, v_max=<span class="hl-num">1.05</span>, max_loading=<span class="hl-num">100.0</span>)
+print(<span class="hl-str">f"Voltage Violations: {len(viols['voltage_violations'])}"</span>)
+print(<span class="hl-str">f"Thermal Overloads : {len(viols['thermal_violations'])}"</span>)
+</pre>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           TAB 9: LICENSING & FREE TIER
+           ==================================================================== -->
+      <section id="tab-licensing" class="tab-content">
+        <h1 class="gh-title">Free Tier & Commercial Licensing</h1>
+        <p>
+          DevEN uses a transparent, flexible licensing architecture designed to empower students, academic researchers, and prototyping engineers while providing enterprise-grade capability for utility networks.
+        </p>
+
+        <div class="gh-alert gh-alert-tip">
+          <div class="gh-alert-title">
+            <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm9 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-.25-6.25a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 1.5 0v-3.5Z"/></svg>
+            Automatic 100 Bus Free Tier
+          </div>
+          <div>
+            <strong>100 Bus Free Limit:</strong> The standard free tier accommodates systems up to <strong>100 buses</strong> (with built-in allowance up to <strong>101 buses</strong>). No registration, internet access, or license file is needed for networks within this limit.
+          </div>
+        </div>
+
+        <h2 class="gh-section-title">Notice Displayed Above Free Tier Limit</h2>
+        <p>If a network exceeds the free tier limit without a commercial license, DevEN cleanly halts and displays the official notice:</p>
+        <div class="gh-code-block">
+          <pre class="gh-terminal">================================================================================
+[*] DevEN LICENSE NOTICE
+================================================================================
+Your free tier limit is 100 buses by DevEN.
+Current system has 1648 buses.
+
+For commercial license, contact: devarajedeva2002@gmail.com
+================================================================================</pre>
+        </div>
+
+        <h2 class="gh-section-title">Commercial License (.pyd) Activation</h2>
+        <p>
+          Commercial licenses are delivered as tamper-proof, machine-compiled native binary modules (<code>deven_license.pyd</code>). They cannot be reverse-engineered or edited in plaintext.
+        </p>
+
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>activate_license.py</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-kw">import</span> deven
+
+<span class="hl-com"># Method A: Set global commercial license path</span>
+deven.set_license(<span class="hl-str">"path/to/deven_license.pyd"</span>)
+
+<span class="hl-com"># Method B: Set license on a specific session</span>
+sess = deven.DevENSession()
+sess.set_license(<span class="hl-str">"licenses/enterprise_deven.pyd"</span>)
+
+<span class="hl-com"># Solve unlimited bus networks</span>
+sess.load_case(<span class="hl-str">"national_grid_5000_buses.raw"</span>)
+sess.run_lfa()
+</pre>
+        </div>
+
+        <h2 class="gh-section-title">Contact for Commercial Licensing</h2>
+        <p>To request commercial licenses for unlimited bus counts, high-performance computing clusters, or enterprise consulting:</p>
+        <ul>
+          <li><strong>Contact Email:</strong> <a href="mailto:devarajedeva2002@gmail.com">devarajedeva2002@gmail.com</a></li>
+          <li><strong>Supported Features:</strong> Unlimited buses, GPU/multithreading acceleration, custom SCADA converters.</li>
+        </ul>
+      </section>
+
+      <!-- ====================================================================
+           TAB 10: CLI REFERENCE
+           ==================================================================== -->
+      <section id="tab-cli" class="tab-content">
+        <h1 class="gh-title">Command Line Interface (CLI) Reference</h1>
+        <p>
+          DevEN includes an advanced command-line tool accessible directly via <code>deven</code> in your terminal.
+        </p>
+
+        <h2 class="gh-section-title">Display Help & API Matrix</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Terminal</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code">deven --help</pre>
+        </div>
+
+        <h2 class="gh-section-title">Launch Interactive Web Documentation Server</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Terminal</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-com"># Start local documentation server and open browser automatically</span>
+deven docs
+
+<span class="hl-com"># Specify custom port</span>
+deven docs --port 8080
+</pre>
+        </div>
+
+        <h2 class="gh-section-title">Run Studies Directly from CLI</h2>
+        <div class="gh-code-block">
+          <div class="gh-code-header">
+            <span>Terminal</span>
+            <button class="gh-copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre class="gh-code"><span class="hl-com"># Run Load Flow on any case (.raw, .dgs, .dat, .py)</span>
+deven run IEEE14BUS.py --study lfa
+
+<span class="hl-com"># Run Short Circuit analysis</span>
+deven run IEEE14BUS.py --study scs --fault-bus 1
+
+<span class="hl-com"># Run Contingency screening</span>
+deven run IEEE14BUS.py --study ca
+
+<span class="hl-com"># Check installation and compiled .pyd status</span>
+deven info
+</pre>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Tab switching logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.sidebar-nav-link').forEach(el => el.classList.remove('active'));
+
+      const targetTab = document.getElementById('tab-' + tabId);
+      if (targetTab) {
+        targetTab.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      const activeLink = document.querySelector(`.sidebar-nav-link[data-tab="${tabId}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+
+      const bc = document.getElementById('breadcrumb-current');
+      if (bc) {
+        bc.textContent = tabId;
+      }
+      history.replaceState(null, '', '#' + tabId);
+    }
+
+    // Search filter for sidebar
+    function filterSidebar(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+        const text = link.innerText.toLowerCase();
+        const tab = link.getAttribute('data-tab');
+        if (text.includes(q) || tab.includes(q)) {
+          link.parentElement.style.display = '';
+        } else {
+          link.parentElement.style.display = 'none';
+        }
+      });
+    }
+
+    // Copy to clipboard helper
+    function copyCode(btn) {
+      const block = btn.closest('.gh-code-block');
+      const code = block.querySelector('pre.gh-code') || block.querySelector('pre');
+      if (code) {
+        navigator.clipboard.writeText(code.innerText.trim()).then(() => {
+          const orig = btn.innerText;
+          btn.innerText = 'Copied!';
+          setTimeout(() => { btn.innerText = orig; }, 1800);
+        });
+      }
+    }
+
+    // Deep link hash support
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById('tab-' + hash)) {
+        switchTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>

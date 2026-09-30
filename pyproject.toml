@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=65.0.0", "wheel", "Cython>=3.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deven"
+version = "1.0.0"
+description = "High-Performance Power System Analysis Engine & Scripting Library"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "DevEN Team" }
+]
+keywords = [
+    "power-systems",
+    "load-flow",
+    "short-circuit",
+    "contingency-analysis",
+    "time-series",
+    "electrical-grid",
+    "iec-60909"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Manufacturing",
+    "Topic :: Scientific/Engineering",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+]
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pandas>=2.0.0",
+    "networkx>=3.0",
+    "openpyxl>=3.0.0",
+    "prettytable>=3.0.0",
+    "typing_extensions>=4.5.0",
+]
+
+[project.optional-dependencies]
+plotting = [
+    "matplotlib>=3.7.0",
+    "plotly>=5.0.0",
+]
+all = [
+    "matplotlib>=3.7.0",
+    "plotly>=5.0.0",
+]
+
+[project.urls]
+Homepage = "https://deven-ps.github.io/DevEN/"
+Repository = "https://github.com/deven-ps/deven.git"
+Documentation = "https://deven-ps.github.io/DevEN/"
+
+[project.scripts]
+deven = "deven.cli:main"
+
+[tool.setuptools]
+packages = [
+    "deven",
+    "deven.core",
+    "deven.engines",
+    "deven.utils",
+    "deven.tools",
+    "deven.tools.sqldb",
+    "deven.runners",
+    "deven.docs"
+]
+
+[tool.setuptools.package-data]
+deven = ["*.pyd", "*.so", "*.pyi", "py.typed"]
+"deven.docs" = ["*"]
+"deven.engines" = ["*.pyd", "*.so", "*.pyi"]
+"deven.utils" = ["*.pyd", "*.so", "*.pyi"]
+

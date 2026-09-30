@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+recursive-include deven/docs *
+recursive-include deven *.pyd
+recursive-include deven *.pyi
+include deven/py.typed
