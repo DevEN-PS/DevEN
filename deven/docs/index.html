@@ -1510,5 +1510,240 @@ deven info
       }
     });
   </script>
+
+<!-- ============================================================
+     SEO / LEGACY CONTENT SECTION
+     Keyword-rich content from the original DevEN website,
+     preserved for search engine and AI indexing.
+     ============================================================ -->
+<section id="seo-legacy" style="background:#0d1117;border-top:2px solid #238636;padding:48px 24px 64px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#c9d1d9;font-size:13px;line-height:1.7;">
+<div style="max-width:1100px;margin:0 auto;">
+
+  <!-- Banner -->
+  <div style="background:linear-gradient(135deg,#161b22,#1f2937);border:1.5px solid #2f81f7;border-radius:8px;padding:20px 28px;margin-bottom:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div style="font-size:18px;font-weight:700;color:#e6edf3;margin-bottom:4px;">&#128214; DevEN &#8212; Complete Technical Reference &amp; Study Guide</div>
+      <div style="font-size:13px;color:#8b949e;">Full engineering reference with 16 power studies, element models, CLI engines, Python API, formulas and application examples. Originally published at <a href="https://deven-ps.github.io/DevEN/" style="color:#2f81f7;text-decoration:none;">deven-ps.github.io/DevEN/</a></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="https://github.com/DevEN-PS/DevEN/releases/download/v1.1/DevEN_Master_User_and_API_Reference_Manual.pdf" target="_blank" style="background:#238636;color:#fff;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;">&#128196; Master PDF Manual</a>
+      <a href="https://github.com/DevEN-PS/DevEN" target="_blank" style="background:#21262d;color:#e6edf3;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid #30363d;">&#11088; GitHub Repository</a>
+    </div>
+  </div>
+
+  <!-- About -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">About DevEN &#8212; Develop Electric Network</h2>
+  <p style="margin-bottom:16px;"><strong style="color:#e6edf3;">DevEN</strong> (Develop Electric Network) is an ultra-fast, scriptable AC power flow and grid analysis engine developed by Devaraj E &amp; team, Bengaluru (&#3349;&#3375;&#3349;&#3379;&#3390;&#3364;&#3370;), India. DevEN features native C/C++ compiled mathematical kernels (compiled to <code style="background:#161b22;padding:1px 5px;border-radius:3px;">.pyd</code> extensions) for maximum execution speed and intellectual property protection. It is designed to replace slow, expensive commercial power system tools for rapid prototyping, automation, scripting, and large-scale batch simulation.</p>
+  <p style="margin-bottom:24px;">The <strong style="color:#e6edf3;">free tier</strong> supports up to 100 buses. Commercial licensing available for unlimited bus counts. Contact: <a href="mailto:devarajedeva2002@gmail.com" style="color:#2f81f7;">devarajedeva2002@gmail.com</a></p>
+
+  <!-- 16 Studies Grid -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">16 Power System Studies in DevEN</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:40px;">
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">1. 1-Phase Load Flow Analysis (LFA)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Calculates steady-state bus voltage magnitudes (V), phase angles (&#952;), active/reactive power flows (P, Q), and system losses. Uses Newton-Raphson (NR), Fast-Decoupled (FDLF), Gauss-Seidel (GS), Levenberg-Marquardt (LM), and Continuation Power Flow (CPF) solvers. Standard: IEEE 399 / IEEE 3004.2 / IEC 60909-0.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_lfa(engine="deven_nr", tol=1e-5, max_iter=30)</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">2. 3-Phase Unbalanced Load Flow (3P LFA)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Solves full coupled 3-phase nodal equations (Y_abc &#215; V_abc = I_abc) for unbalanced distribution grids. Calculates neutral voltage rise (Vn), phase loadings, Voltage Unbalance Factor (VUF%). Standard: IEEE Std 1159 / NEMA MG 1 / IEC 61000-4-30.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_3ph_lfa()</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">3. Short Circuit Study (SCS)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">IEC 60909 and ANSI/IEEE C37 fault calculations. Initial symmetrical short-circuit current (Ik''), peak current (ip), breaking current (Ib), DC offset. 3-Ph, SLG, LL, DLG fault types supported.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_scs(method="iec")</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">4. Contingency Analysis (CA)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">N-1, N-k, user-defined multi-element contingency simulation for lines and transformers. Island detection, post-contingency thermal/voltage violations. Standard: NERC TPL / IEEE 3006.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_ca(lines=[1,2,3], transformers=[1])</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">5. Time Series Load Flow (TS-LFA)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Multi-period time-domain simulation (24-hour, 8760-hour annual). Hourly/sub-hourly dispatch. Time-series voltage profiles, branch loadings, loss accumulation stored in SQLite.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_timeseries(duration=24.0, step_size=1.0)</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">6. Optimal Power Flow (OPF)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Minimizes total generation cost ($/MWh) subject to power flow equations, voltage limits, thermal limits, and generator MW/MVAr capability constraints. KKT interior point and IPOPT solvers.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_opf(obj="min_cost")</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">7. Voltage Stability Analysis (VSA)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Computes PV nose curves and QV curves. Reports voltage stability index (VSI), maximum loadability (Pmax), critical operating points. Standard: IEEE Std 1110 / IEC 60038.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_vsa(bus=5, direction="load")</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">8. Motor Starting Study (MSS)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Calculates bus voltage dip (&#916;V%) during induction motor DOL, star-delta (Y-&#916;), and soft-starter transients. NEMA MG 1 voltage dip limit compliance. Standard: IEEE 399 / IEC 60034-12.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_mss(motor_bus=12, hp=1500, method="dol")</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">9. Harmonic Load Flow (HLF)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Injects harmonic current spectra (orders 3, 5, 7, 11, 13&#8230;) from VFDs/UPS/arc furnaces. Solves harmonic bus voltages, reports THD%, per IEEE 519 / IEC 61000-3-6.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_hlf(harmonic_orders=[3,5,7,11,13])</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">10. Protection Coordination Study (PCS)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">OCR, DOCR, differential, and distance relays. TCC plots, coordination margins (CTI &#8805; 0.3s), selectivity gap detection. Standard: IEEE Std 242 / IEC 60255.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_pcs(relay_type="ocr", curve="IEC_EI")</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">11. Ground Fault Study (GFS)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Earth fault currents for solidly/resistance/reactance grounded and ungrounded systems. Ground potential rise (GPR), step/touch voltages, grounding adequacy. Standard: IEEE Std 80 / IEC 60364.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_gfs(grounding="resistance", Rg=40.0)</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">12. Power Quality Study (PQS)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Voltage sags, swells, flicker (Pst, Plt), THD, TDD, power factor, unbalance. Reports against IEEE 519, EN 50160, IEC 61000-4-30 standards.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_pqs(metrics=["thd","pf","flicker"])</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">13. Cable Ampacity &amp; Thermal Rating (CAT)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Maximum continuous ampacity of underground cables and overhead conductors per IEC 60287 and IEEE 835. Soil thermal resistivity, installation depth, burial grouping, ambient temperature.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_cat(cable_id=3, soil_rho=1.0, depth=0.9)</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">14. Transient Stability Study (TSS)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Time-domain swing equation integration with generator dynamic models (Classical, GENROU, AVR exciter) after fault clearing. Critical clearing time (CCT), rotor angle trajectories, speed deviations. Standard: IEEE Std 1110.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_tss(fault_bus=3, fault_dur=0.1)</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">15. Total Transfer Capability (TTC/ATC)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">TTC and ATC (= TTC &#8722; TRM &#8722; ETC &#8722; CBM) for transmission corridors. FERC Order 888 compliance and open-access tariff studies. Standard: NERC MOD-001 / NERC TPL.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_ttc(from_area=1, to_area=2)</div>
+    </div>
+
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:16px;">
+      <div style="font-weight:700;color:#3fb950;margin-bottom:6px;">16. Reactive Power Planning (RPP)</div>
+      <p style="color:#8b949e;font-size:12px;margin-bottom:8px;">Optimal locations/sizes for reactive compensation (shunt capacitors, SVCs, STATCOMs) to minimize losses, improve voltage profiles, maximize loadability. Sensitivity-based (&#8706;Q/&#8706;V) and mixed-integer optimization.</p>
+      <div style="font-size:11px;color:#56d364;background:#0d1117;padding:6px 10px;border-radius:4px;font-family:monospace;">sess.run_rpp(method="sensitivity")</div>
+    </div>
+
+  </div><!-- end studies grid -->
+
+  <!-- Element Library -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">Element Library</h2>
+  <p style="margin-bottom:16px;">DevEN supports a comprehensive set of power system elements modelled from first principles. All element parameters follow IEC / IEEE conventions.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:32px;">
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Bus</strong><br><span style="color:#8b949e;">Slack / PV / PQ / Isolated types. V-pu, angle, kV base.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Generator</strong><br><span style="color:#8b949e;">MW, MVAr, Vset, Pmin/Pmax, Qmin/Qmax, droop.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Load</strong><br><span style="color:#8b949e;">Constant power (ZIP), constant current, constant impedance, motor loads.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Transmission Line</strong><br><span style="color:#8b949e;">Pi-model, R, X, B/2 per unit or ohm/km. Thermal rating (MVA).</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">2-Winding Transformer</strong><br><span style="color:#8b949e;">YY, YD, DD, ZigZag. On-load tap changer (OLTC), ULTC, phase shifting.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">3-Winding Transformer</strong><br><span style="color:#8b949e;">Star equivalent, primary/secondary/tertiary MVA ratings and impedances.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Shunt Capacitor / Reactor</strong><br><span style="color:#8b949e;">Fixed/switched MVAr. Harmonic filter C-R-L banks.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">SVC / STATCOM</strong><br><span style="color:#8b949e;">Voltage-controlled reactive injection model. Slope and deadband settings.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Induction Motor</strong><br><span style="color:#8b949e;">Equivalent circuit (Rs, Xs, Rr, Xr, Xm, slip). Starting curve.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Harmonic Source</strong><br><span style="color:#8b949e;">Current injection model. VFD, UPS, arc furnace harmonic spectra.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Wind / Solar (PV)</strong><br><span style="color:#8b949e;">Type 3/4 DFIG, full-converter PV inverter. FRT capability curve.</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:12px;font-size:12px;"><strong style="color:#e6edf3;">Battery Storage (BESS)</strong><br><span style="color:#8b949e;">4-quadrant inverter, SOC model, charge/discharge scheduling.</span></div>
+  </div>
+
+  <!-- Solvers & Engines -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">Solvers &amp; Engines</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:32px;">
+    <thead><tr style="background:#161b22;">
+      <th style="text-align:left;padding:8px 12px;color:#e6edf3;border:1px solid #30363d;">Engine ID</th>
+      <th style="text-align:left;padding:8px 12px;color:#e6edf3;border:1px solid #30363d;">Method</th>
+      <th style="text-align:left;padding:8px 12px;color:#e6edf3;border:1px solid #30363d;">Convergence</th>
+      <th style="text-align:left;padding:8px 12px;color:#e6edf3;border:1px solid #30363d;">Best For</th>
+    </tr></thead>
+    <tbody>
+      <tr><td style="padding:7px 12px;border:1px solid #21262d;color:#56d364;font-family:monospace;">deven_nr</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Newton-Raphson</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Quadratic</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Transmission networks, general use</td></tr>
+      <tr style="background:#161b22;"><td style="padding:7px 12px;border:1px solid #21262d;color:#56d364;font-family:monospace;">deven_fdlf</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Fast-Decoupled (XB/BX)</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Linear per subproblem</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Large systems, high X/R</td></tr>
+      <tr><td style="padding:7px 12px;border:1px solid #21262d;color:#56d364;font-family:monospace;">deven_gs</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Gauss-Seidel</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Linear</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Small radial distribution</td></tr>
+      <tr style="background:#161b22;"><td style="padding:7px 12px;border:1px solid #21262d;color:#56d364;font-family:monospace;">deven_lm</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Levenberg-Marquardt</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Quadratic (robust)</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Ill-conditioned, heavily loaded</td></tr>
+      <tr><td style="padding:7px 12px;border:1px solid #21262d;color:#56d364;font-family:monospace;">deven_cpf</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Continuation Power Flow</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Predictor-corrector</td><td style="padding:7px 12px;border:1px solid #21262d;color:#8b949e;">Voltage stability nose curves</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Key Formulas -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">Key Power Flow Equations</h2>
+  <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:20px;margin-bottom:24px;font-family:monospace;font-size:12px;color:#e6edf3;line-height:2.2;">
+    <div style="color:#8b949e;margin-bottom:8px;">// Active and Reactive Power Injection at Bus i:</div>
+    <div>P&#7522; = &#931;<sub>j</sub> |V&#7522;| |V&#8408;| (G&#7522;&#8408; cos &#952;&#7522;&#8408; + B&#7522;&#8408; sin &#952;&#7522;&#8408;)</div>
+    <div>Q&#7522; = &#931;<sub>j</sub> |V&#7522;| |V&#8408;| (G&#7522;&#8408; sin &#952;&#7522;&#8408; &minus; B&#7522;&#8408; cos &#952;&#7522;&#8408;)</div>
+    <div style="margin-top:12px;color:#8b949e;">// Short Circuit (IEC 60909) &#8212; Initial symmetrical current:</div>
+    <div>I&#7503;'' = c &#215; V&#8345; / (&#8730;3 &#215; |Z&#7503;|)</div>
+    <div style="margin-top:12px;color:#8b949e;">// Cable Ampacity (IEC 60287):</div>
+    <div>I = &#8730;[ (&#916;&#952; &#8722; W&#7496;[0.5T&#8321; + n(T&#8322; + T&#8323; + T&#8324;)]) / (T&#8321;R + n(1 + &#955;&#8321;)T&#8322;R + n(1 + &#955;&#8321; + &#955;&#8322;)(T&#8323; + T&#8324;)R) ]</div>
+    <div style="margin-top:12px;color:#8b949e;">// Voltage Unbalance Factor (VUF):</div>
+    <div>VUF% = (|V&#8331;&#8331;&#8331;| / |V&#8330;&#8330;&#8330;|) &#215; 100</div>
+  </div>
+
+  <!-- Supported File Formats -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">Supported Input / Output File Formats</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:32px;font-size:12px;">
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.dss</code><span style="color:#8b949e;"> &#8212; OpenDSS</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.raw / .rawx</code><span style="color:#8b949e;"> &#8212; PSS/E</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.psse</code><span style="color:#8b949e;"> &#8212; PSS/E project</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.m (Matpower)</code><span style="color:#8b949e;"> &#8212; IEEE test cases</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.xlsx / .csv</code><span style="color:#8b949e;"> &#8212; Excel / CSV</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.json</code><span style="color:#8b949e;"> &#8212; Network JSON</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.etap</code><span style="color:#8b949e;"> &#8212; ETAP export</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.pf (DigSilent)</code><span style="color:#8b949e;"> &#8212; PowerFactory</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.db3</code><span style="color:#8b949e;"> &#8212; SQLite output</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:10px;"><code style="color:#f78166;">.pdf / .docx</code><span style="color:#8b949e;"> &#8212; Report output</span></div>
+  </div>
+
+  <!-- Quick CLI Reference -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">CLI Quick Reference</h2>
+  <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:20px;margin-bottom:32px;font-size:12px;font-family:monospace;color:#c9d1d9;line-height:2;">
+    <div><span style="color:#56d364;">deven run-lfa</span> <span style="color:#8b949e;">grid.dss --engine deven_nr --tol 1e-6 --max-iter 50 --output results.db3</span></div>
+    <div><span style="color:#56d364;">deven run-scs</span> <span style="color:#8b949e;">grid.raw --method iec --fault-bus 5 --fault-type slg --output scs_results.xlsx</span></div>
+    <div><span style="color:#56d364;">deven run-ca</span>  <span style="color:#8b949e;">grid.json --contingencies n1 --monitor voltage thermal --output ca_report.pdf</span></div>
+    <div><span style="color:#56d364;">deven run-ts</span>  <span style="color:#8b949e;">grid.xlsx --duration 8760 --step 1.0 --profile load_profile.csv --output ts.db3</span></div>
+    <div><span style="color:#56d364;">deven info</span>    <span style="color:#8b949e;"># print version, license status, bus count limit</span></div>
+    <div><span style="color:#56d364;">deven license</span> <span style="color:#8b949e;">activate --key &lt;YOUR_KEY&gt;  # unlock unlimited buses</span></div>
+  </div>
+
+  <!-- Standards & Compliance -->
+  <h2 style="color:#58a6ff;font-size:22px;font-weight:700;border-bottom:1px solid #21262d;padding-bottom:10px;margin-bottom:20px;">Standards &amp; Compliance Reference</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:32px;font-size:12px;">
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEC 60909-0:2016</strong><span style="color:#8b949e;"> &#8212; Short-circuit currents in three-phase AC systems</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEC 60287</strong><span style="color:#8b949e;"> &#8212; Electric cables &#8212; current ratings</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEC 61000-3-6 / 4-30</strong><span style="color:#8b949e;"> &#8212; Harmonics &amp; power quality</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEEE 519-2022</strong><span style="color:#8b949e;"> &#8212; Harmonic control in power systems</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEEE 399 / 3004.2</strong><span style="color:#8b949e;"> &#8212; Power system analysis &amp; load flow</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEEE Std 242 (Buff Book)</strong><span style="color:#8b949e;"> &#8212; Protection &amp; coordination</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEEE Std 80</strong><span style="color:#8b949e;"> &#8212; Grounding of AC substations</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">NERC TPL / MOD-001</strong><span style="color:#8b949e;"> &#8212; Transmission planning standards</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">NEMA MG 1</strong><span style="color:#8b949e;"> &#8212; Motors and generators</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">EN 50160</strong><span style="color:#8b949e;"> &#8212; Voltage characteristics of public electricity supply</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">FERC Order 888</strong><span style="color:#8b949e;"> &#8212; Open-access transmission tariff</span></div>
+    <div style="background:#161b22;border:1px solid #30363d;border-radius:4px;padding:12px;"><strong style="color:#e6edf3;">IEC 60034-12</strong><span style="color:#8b949e;"> &#8212; Rotating electrical machines &#8212; starting</span></div>
+  </div>
+
+  <!-- Footer links -->
+  <div style="border-top:1px solid #21262d;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div style="font-size:12px;color:#8b949e;">&#169; 2024&#8211;2025 Devaraj E &amp; Team, Bengaluru, India &#183; DevEN &#8212; Develop Electric Network</div>
+    <div style="display:flex;gap:16px;font-size:12px;">
+      <a href="https://pypi.org/project/deven/" style="color:#2f81f7;text-decoration:none;">PyPI</a>
+      <a href="https://github.com/DevEN-PS/DevEN" style="color:#2f81f7;text-decoration:none;">GitHub</a>
+      <a href="mailto:devarajedeva2002@gmail.com" style="color:#2f81f7;text-decoration:none;">Contact</a>
+      <a href="https://deven-ps.github.io/DevEN/" style="color:#2f81f7;text-decoration:none;">Docs</a>
+    </div>
+  </div>
+
+</div>
+</section>
+
 </body>
 </html>
