@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="DevEN - Power system study engine. Developer documentation, Python API reference, and standalone study runners. Made in India from Bengaluru.">
+<title>DevEN | Power System Study Engine</title>
+<style>
+:root{--ink:#17212d;--muted:#617080;--line:#dfe5eb;--paper:#fff;--wash:#f5f7f9;--blue:#174f83;--blue2:#0d3d69;--soft:#eaf1f7;--green:#23634d;--shadow:0 12px 36px rgba(20,37,54,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:48px}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.topbar{height:40px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,2.5vw,40px);position:sticky;top:0;background:rgba(255,255,255,.98);backdrop-filter:blur(6px);z-index:10}
+.brand{font-size:17px;font-weight:800;letter-spacing:-.03em;color:var(--blue)}
+.toplinks{display:flex;gap:18px;font-size:12px;font-weight:600;color:#455565}.toplinks a{color:inherit}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);max-width:1500px;margin:auto}
+.sidebar{border-right:1px solid var(--line);padding:14px 14px 36px 20px;position:sticky;top:40px;height:calc(100vh - 40px);overflow:auto}
+.side-label{font-size:9.5px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:#8995a1;margin:16px 0 5px}
+.side-link{display:block;padding:4px 7px;margin:1px 0;border-radius:4px;color:#465566;font-size:12px}
+.side-link:hover,.side-link.active{background:var(--soft);color:var(--blue);text-decoration:none}
+.content{max-width:1050px;padding:26px clamp(18px,3.5vw,56px) 70px}
+.eyebrow{font-size:10.5px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+h1{font-size:clamp(28px,3.2vw,42px);line-height:1.12;letter-spacing:-.04em;margin:8px 0 12px;font-weight:750}
+h2{font-size:22px;letter-spacing:-.025em;margin:40px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:20px 0 6px}
+p{color:#455565;margin:6px 0 12px}
+.lead{font-size:15.5px;line-height:1.6;max-width:760px;color:#4d5c6b}
+.meta{display:flex;gap:16px;flex-wrap:wrap;color:#6d7b89;font-size:11.5px;margin:16px 0 24px}
+.meta span{border-left:1px solid var(--line);padding-left:10px}.meta span:first-child{border-left:0;padding-left:0}
+.search-wrap{position:relative;margin:18px 0 12px;max-width:690px}
+.search{width:100%;height:40px;border:1px solid #cbd5df;border-radius:5px;padding:0 40px 0 12px;font:inherit;font-size:13px;outline:none;background:#fff}
+.search:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,79,131,.1)}
+.search-key{position:absolute;right:10px;top:10px;border:1px solid var(--line);border-radius:4px;padding:1px 5px;color:#788593;font-size:10px}
+.results{display:none;border:1px solid var(--line);border-radius:5px;margin-top:5px;background:#fff;box-shadow:var(--shadow);max-height:340px;overflow:auto}
+.results.show{display:block}
+.result{display:block;padding:9px 11px;border-bottom:1px solid #edf0f3;color:var(--ink)}.result:last-child{border:0}
+.result strong{display:block;font-size:12px}.result small{color:var(--muted);font-size:10.5px}
+.result:hover{background:var(--wash);text-decoration:none}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 28px}
+.intro-card{border:1px solid var(--line);padding:12px 14px;border-radius:5px;background:#fff}
+.intro-card strong{display:block;font-size:12px;margin-bottom:2px}
+.intro-card span{font-size:11px;color:var(--muted)}
+.callout{border-left:3px solid var(--blue);background:#f0f5fa;padding:12px 16px;margin:16px 0;color:#354556;font-size:12.5px}
+.code{position:relative;background:#101c29;color:#e6edf4;border-radius:5px;padding:14px 16px;margin:10px 0 14px;overflow:auto;font:11.5px/1.65 "SFMono-Regular",Consolas,monospace}
+.code .copy{position:absolute;right:8px;top:8px;background:#243547;border:1px solid #405367;color:#dce6ef;padding:3px 7px;border-radius:3px;font:10px system-ui;cursor:pointer}
+.code .copy:hover{background:#31485e}
+.api-list{border:1px solid var(--line);border-radius:5px;overflow:hidden;margin:12px 0}
+.api-item{padding:12px 14px;border-bottom:1px solid var(--line);scroll-margin-top:50px}
+.api-item:last-child{border:0}
+.api-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.api-name{font:600 13px "SFMono-Regular",Consolas,monospace;color:#163f66}
+.tag{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#526579;background:#f0f3f6;border-radius:3px;padding:2px 5px;white-space:nowrap}
+.tag-recom{background:#e7f5ec;color:#1c7430;font-weight:700}
+.signature{font:11px/1.55 "SFMono-Regular",Consolas,monospace;color:#526171;background:#f7f9fb;padding:7px 9px;border-radius:3px;overflow-wrap:anywhere;margin:7px 0}
+.desc{font-size:12px;color:#536171;margin:4px 0 0}
+.param-table{width:100%;border-collapse:collapse;font-size:11.5px;margin:8px 0 14px}
+.param-table th{text-align:left;background:#f4f6f8;color:#526171;font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+.param-table th,.param-table td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+.param-table code{font:10.5px "SFMono-Regular",Consolas,monospace;color:#174f83}
+.study-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.study{border:1px solid var(--line);padding:12px;border-radius:5px;background:#fff}
+.study.recommended{border-color:#2ea44f;background:#fafffa}
+.study b{display:block;font-size:12.5px}
+.study p{font-size:11px;margin:3px 0 0}
+.runner-card{border:1px solid var(--line);padding:14px;border-radius:5px;background:#fff;margin-bottom:12px}
+.runner-card h4{margin:0 0 5px;font-size:14px;color:var(--blue);display:flex;align-items:center;gap:6px}
+.runner-card p{font-size:12px;margin:0 0 8px;color:#526171}
+.footer{border-top:1px solid var(--line);padding:24px 0 16px;margin-top:44px;color:#617080;font-size:12px;display:flex;flex-direction:column;gap:10px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.content{padding:20px 14px 40px}.intro-grid{grid-template-columns:1fr}.toplinks{gap:10px}.toplinks a:nth-child(2){display:none}}
+@media(max-width:560px){.topbar{padding:0 10px}.toplinks a:nth-child(3){display:none}.study-grid{grid-template-columns:1fr}.api-head{display:block}.tag{display:inline-block;margin-top:5px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="DevEN home">DevEN</a>
+  <nav class="toplinks"><a href="#quickstart">Quick start</a><a href="#runners">Study Runners</a><a href="#cli">CLI & Scaffolding</a><a href="#api-reference">API Reference</a><a href="https://github.com/DevEN-PS/DevEN" target="_blank" rel="noreferrer">GitHub Repo</a></nav>
+</header>
+<div class="layout" id="top">
+<aside class="sidebar">
+  <div class="side-label">Getting Started</div>
+  <a class="side-link active" href="#overview">Overview</a>
+  <a class="side-link" href="#rawx-preference">RAWX First Preference</a>
+  <a class="side-link" href="#quickstart">Quick Start</a>
+  <a class="side-link" href="#installation">Installation & Pip</a>
+  <a class="side-link" href="#runners">Study Runners</a>
+  <div class="side-label">Standalone Runners</div>
+  <a class="side-link" href="#runner-lfa">run_lfa.py (Load Flow)</a>
+  <a class="side-link" href="#runner-scs">run_scs.py (Short Circuit)</a>
+  <a class="side-link" href="#runner-bc">run_bc.py (Batch Contingency)</a>
+  <a class="side-link" href="#runner-ha">run_ha.py (Harmonics & Scan)</a>
+  <a class="side-link" href="#runner-3ph">run_3ph.py (Three-Phase LFA)</a>
+  <a class="side-link" href="#runner-af">run_af.py (Arc Flash Hazard)</a>
+  <div class="side-label">API Reference</div>
+  <a class="side-link" href="#case-object">PyCase Object</a>
+  <a class="side-link" href="#ingestion">Data Ingestion</a>
+  <a class="side-link" href="#modifiers">In-Memory Modifiers</a>
+  <a class="side-link" href="#load-flow">Load Flow API</a>
+  <a class="side-link" href="#short-circuit">Short Circuit API</a>
+  <a class="side-link" href="#results">Results & Export</a>
+  <div class="side-label">Reference</div>
+  <a class="side-link" href="#cli">Command-Line Interface</a>
+  <a class="side-link" href="#formats">Supported Grid Formats</a>
+  <a class="side-link" href="#contact">Contact & Support</a>
+</aside>
+<main class="content">
+<section id="overview">
+<div class="eyebrow">Power system study engine · Made in India from Bengaluru</div>
+<h1>DevEN</h1>
+<p class="lead">A high-performance power system study engine for loading electrical network models, configuring engineering studies, executing ultra-fast calculations, and extracting comprehensive results through the <code>devenpy</code> Python interface and standalone study runners.</p>
+<div class="meta"><span>Package: <b>devenpy</b></span><span>Origin: <b>Bengaluru, India</b></span><span>Engine: <b>Rust Native SIMD & Rayon</b></span><span>Container: <b>PyCase</b></span><span>Version: <b>1.0.0</b></span></div>
+
+<div class="callout" id="rawx-preference">
+<strong style="color:var(--blue);font-size:13px;display:block;margin-bottom:4px">🌟 Primary Format Preference: PSS/E RAWX (.rawx)</strong>
+DevEN gives first preference to <b>PSS/E RAWX (<code>.rawx</code>)</b> format. RAWX provides a modern, schema-validated structured XML/JSON representation with full IEEE floating-point precision and fast native parsing.
+</div>
+
+<div class="search-wrap">
+<input class="search" id="apiSearch" type="search" placeholder="Search methods, parameters, study areas, runners…" autocomplete="off" aria-label="Search API documentation">
+<span class="search-key">/</span><div class="results" id="searchResults" role="listbox"></div>
+</div>
+<div class="intro-grid">
+<div class="intro-card"><strong>RAWX Native Performance</strong><span>First-preference RAWX ingestion with instantaneous C-speed schema parsing and validation.</span></div>
+<div class="intro-card"><strong>6 Turnkey Study Runners</strong><span>Pre-built, fully editable scripts for LFA, SCS, Harmonics, 3-Phase, Arc Flash, and Contingency.</span></div>
+<div class="intro-card"><strong>Multi-Format Extended I/O</strong><span>Seamless Python parsing for MATPOWER (.m), IEEE CDF, Excel (.xlsx), AUX, UCTE, and CIM.</span></div>
+</div>
+</section>
+
+<section id="installation">
+<h2>Installation & CLI Setup</h2>
+<p>Install the <code>devenpy</code> package directly from your wheel or repository:</p>
+<div class="code"><button class="copy" type="button">Copy</button><pre>pip install devenpy</pre></div>
+<p>Once installed, you can launch this interactive documentation locally or scaffold all study runners into your working directory with simple CLI commands:</p>
+<div class="code"><button class="copy" type="button">Copy</button><pre># 1. Open this interactive documentation in your web browser (via local web server):
+devenpy --docs
+
+# 2. Export all 6 editable study runners, universal I/O parser, and benchmark grids directly to your current folder:
+devenpy --export-runners
+
+# You can also run via Python module:
+python -m devenpy --docs
+python -m devenpy --export-runners</pre></div>
+</section>
+
+<section id="quickstart">
+<h2>Quick Start</h2>
+<p>Create a case, load a recommended <code>.rawx</code> network file, run an AC load-flow calculation and inspect the returned convergence status:</p>
+<div class="code"><button class="copy" type="button">Copy</button><pre>import devenpy
+
+# Instantiate PyCase and load recommended RAWX network
+case = devenpy.PyCase()
+case.load_rawx("cases/bench.rawx")  # First preference: PSS/E RAWX
+
+# Execute AC Newton-Raphson Load Flow
+status = case.solve_load_flow(
+    method="nr",
+    tol=1e-5,
+    max_iter=30,
+    enforce_q_limits=True
+)
+
+print("Converged:", status["converged"])
+print("Iterations:", status["iterations"])
+print("Max |dP|:", status["max_dp"])
+
+# Inspect bus voltage and power injection
+v_mag, v_ang = case.bus_voltage(1)
+p_inj, q_inj = case.bus_power(1)
+print(f"Bus 1: V = {v_mag:.4f} pu, P = {p_inj:.2f} MW, Q = {q_inj:.2f} MVar")</pre></div>
+</section>
+
+<section id="runners">
+<h2>Standalone Study Runners</h2>
+<p>DevEN includes 6 specialized, turnkey runner scripts designed for practical engineering workflows. Each script contains an editable in-code configuration block at the top, supports interactive file pasting, and outputs formatted console tables and CSV reports.</p>
+
+<div class="runner-card" id="runner-lfa">
+<h4>1. run_lfa.py — Load Flow Analysis</h4>
+<p>High-performance AC and DC power flow engine supporting Newton-Raphson, Fast Decoupled, DC Linear, Constant Jacobian, and Gauss-Seidel.</p>
+<table class="param-table">
+<thead><tr><th>In-Code Option</th><th>Allowed Values</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>METHOD</code></td><td><code>"nr"</code>, <code>"fdlf"</code>, <code>"dc"</code>, <code>"dishonest"</code>, <code>"gs"</code></td><td>Algorithm selection. Full NR is recommended for large grids.</td></tr>
+<tr><td><code>TOLERANCE</code></td><td><code>0.0001</code> / <code>1e-5</code></td><td>Power mismatch convergence tolerance (p.u.).</td></tr>
+<tr><td><code>MAX_ITER</code></td><td><code>30</code> - <code>50</code></td><td>Maximum iteration count before abort or fallback.</td></tr>
+<tr><td><code>ENFORCE_Q_LIMITS</code></td><td><code>True</code> / <code>False</code></td><td>Check generator reactive capability limits and convert PV buses to PQ when clamped.</td></tr>
+<tr><td><code>CHECK_VOLTAGE</code></td><td><code>True</code> / <code>False</code></td><td>Screen all buses for under/overvoltage against <code>V_MIN_PU</code> and <code>V_MAX_PU</code>.</td></tr>
+<tr><td><code>CUSTOM_GEN_EDITS</code></td><td>List of dicts</td><td>In-code modification of generator setpoints (<code>pg</code>, <code>vs</code>, <code>qmax</code>, <code>qmin</code>) before solve.</td></tr>
+<tr><td><code>CUSTOM_LOAD_EDITS</code></td><td>List of dicts</td><td>In-code modification of active and reactive load demands (<code>pl</code>, <code>ql</code>).</td></tr>
+</tbody>
+</table>
+<div class="code"><button class="copy" type="button">Copy</button><pre>python run_lfa.py</pre></div>
+</div>
+
+<div class="runner-card" id="runner-scs">
+<h4>2. run_scs.py — Short Circuit Studies (IEC 60909 / ANSI C37)</h4>
+<p>Calculates symmetrical and asymmetrical short-circuit currents, equivalent X/R ratios, circuit breaker duty ratings, and branch/generator fault contributions.</p>
+<table class="param-table">
+<thead><tr><th>In-Code Option</th><th>Allowed Values</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>STUDY_MODE</code></td><td><code>"custom"</code>, <code>"single"</code>, <code>"scan"</code></td><td>Run custom list of faults, single-bus fault, or system-wide scan across all buses.</td></tr>
+<tr><td><code>CUSTOM_FAULTS</code></td><td>List of dicts</td><td>Define multiple faults in code: <code>bus</code>, <code>type</code> (3phase, slg, ll, dlg), <code>method</code> (iec, ansi), <code>rf</code>, <code>xf</code>, <code>cb_mva</code>.</td></tr>
+<tr><td><code>METHOD</code></td><td><code>"iec"</code> / <code>"ansi"</code></td><td>Standards: IEC 60909:2016 or ANSI/IEEE C37.010 / C37.5.</td></tr>
+<tr><td><code>C_FACTOR</code></td><td><code>1.10</code> / <code>1.00</code></td><td>IEC voltage factor c (1.10 for maximum short-circuit current, 1.00 for minimum).</td></tr>
+<tr><td><code>BREAKER_CHECK</code></td><td><code>True</code> / <code>False</code></td><td>Evaluates breaker duty percentage and CEA 80% safety margin.</td></tr>
+</tbody>
+</table>
+<div class="code"><button class="copy" type="button">Copy</button><pre>python run_scs.py</pre></div>
+</div>
+
+<div class="runner-card" id="runner-bc">
+<h4>3. run_bc.py — Batch Contingency & N-1 Outage Screening</h4>
+<p>Performs high-speed parallel N-1 contingency analysis across transmission lines, transformers, and generators, checking for post-contingency voltage collapse and violations.</p>
+<table class="param-table">
+<thead><tr><th>In-Code Option</th><th>Allowed Values</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>CONTINGENCY_MODE</code></td><td><code>"custom"</code>, <code>"auto"</code>, <code>"both"</code></td><td>Run user-defined outages in <code>CUSTOM_CONTINGENCIES</code>, full automated N-1 sweep, or both.</td></tr>
+<tr><td><code>CUSTOM_CONTINGENCIES</code></td><td>List of dicts</td><td>Define lines (<code>from_bus</code>, <code>to_bus</code>, <code>ckt</code>), transformers, and generator trips (<code>bus</code>, <code>id</code>).</td></tr>
+<tr><td><code>METHOD</code></td><td><code>"fdlf"</code> / <code>"nr"</code></td><td>Fast Decoupled is recommended for sub-millisecond per-contingency screening.</td></tr>
+<tr><td><code>V_MIN_PU / V_MAX_PU</code></td><td><code>0.90</code> / <code>1.10</code></td><td>Post-contingency voltage emergency limits.</td></tr>
+</tbody>
+</table>
+<div class="code"><button class="copy" type="button">Copy</button><pre>python run_bc.py</pre></div>
+</div>
+
+<div class="runner-card" id="runner-ha">
+<h4>4. run_ha.py — Harmonic Analysis & Resonance Frequency Scan</h4>
+<p>Calculates driving-point impedance profiles Z(f), identifies parallel resonance frequencies, solves multi-order harmonic penetration, and assesses IEEE 519 compliance.</p>
+<table class="param-table">
+<thead><tr><th>In-Code Option</th><th>Allowed Values</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>STUDY_TYPE</code></td><td><code>"scan"</code>, <code>"harmonics"</code>, <code>"both"</code></td><td>Execute frequency scan, multi-order harmonic flow, or both.</td></tr>
+<tr><td><code>F_START_HZ / F_END_HZ</code></td><td><code>50.0</code> / <code>2500.0</code></td><td>Frequency sweep range (Hz) (up to 50th harmonic order).</td></tr>
+<tr><td><code>CUSTOM_HARMONIC_SOURCES</code></td><td>List of dicts</td><td>Inject harmonic current sources: <code>bus</code>, <code>name</code>, <code>phase</code>, <code>i_fund_amps</code>, <code>ang_deg</code>, <code>spectrum_type</code> (6pulse, 12pulse, custom).</td></tr>
+<tr><td><code>CUSTOM_HARMONIC_FILTERS</code></td><td>List of dicts</td><td>Install mitigation filters: <code>bus</code>, <code>name</code>, <code>filter_type</code> (single_tuned, high_pass), <code>tuning_order</code>, <code>q_factor</code>, <code>mvar_rating</code>.</td></tr>
+<tr><td><code>THD_V_LIMIT_PCT</code></td><td><code>5.0</code></td><td>Maximum allowable bus voltage Total Harmonic Distortion (%) under IEEE 519.</td></tr>
+</tbody>
+</table>
+<div class="code"><button class="copy" type="button">Copy</button><pre>python run_ha.py</pre></div>
+</div>
+
+<div class="runner-card" id="runner-3ph">
+<h4>5. run_3ph.py — Three-Phase Unbalanced Power Flow</h4>
+<p>Full phase-coordinate (ABC+N) load flow solver for unbalanced distribution networks, DER integration, and single-phase load studies.</p>
+<table class="param-table">
+<thead><tr><th>In-Code Option</th><th>Allowed Values</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>WIRE_CONFIG</code></td><td><code>"4wire"</code> / <code>"3wire"</code></td><td>4-wire system with explicit neutral conductor or Kron-reduced 3-wire.</td></tr>
+<tr><td><code>METHOD</code></td><td><code>"fcim"</code> / <code>"nr"</code></td><td>Forward Current Injection Method or 3-phase Newton-Raphson.</td></tr>
+<tr><td><code>CUSTOM_PHASE_LOADS</code></td><td>List of dicts</td><td>Specify unbalanced phase loads: <code>bus</code>, <code>pa_mw</code>, <code>qa_mvar</code>, <code>pb_mw</code>, <code>qb_mvar</code>, <code>pc_mw</code>, <code>qc_mvar</code>.</td></tr>
+<tr><td><code>MAX_VUF_PCT</code></td><td><code>2.0</code></td><td>IEEE 2% Voltage Unbalance Factor (V2/V1 %) compliance threshold.</td></tr>
+</tbody>
+</table>
+<div class="code"><button class="copy" type="button">Copy</button><pre>python run_3ph.py</pre></div>
+</div>
+
+<div class="runner-card" id="runner-af">
+<h4>6. run_af.py — Arc Flash Hazard Analysis (IEEE 1584-2018)</h4>
+<p>Evaluates arcing current, incident energy, arc flash boundary, and required personal protective equipment (PPE) category per IEEE 1584-2018 and NFPA 70E-2024.</p>
+<table class="param-table">
+<thead><tr><th>In-Code Option</th><th>Allowed Values</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>STUDY_MODE</code></td><td><code>"custom"</code>, <code>"single"</code>, <code>"scan"</code></td><td>Evaluate custom equipment list, single bus, or all energized buses.</td></tr>
+<tr><td><code>CUSTOM_ARC_FLASH_BUSES</code></td><td>List of dicts</td><td>Define equipment: <code>bus</code>, <code>config</code> (vcb, vcbb, hcb, voa, hoa), <code>working_dist_mm</code>, <code>gap_mm</code>, <code>clearing_time</code>.</td></tr>
+<tr><td><code>WORKING_DIST_MM</code></td><td><code>457.2</code> / <code>610.0</code> / <code>914.4</code></td><td>Working distance (18 inches for panels, 24 inches for switchgear, 36 inches for open yard).</td></tr>
+<tr><td><code>CLEARING_TIME_SEC</code></td><td><code>0.05</code> - <code>0.20</code></td><td>Total protective relay tripping + circuit breaker clearing time.</td></tr>
+</tbody>
+</table>
+<div class="code"><button class="copy" type="button">Copy</button><pre>python run_af.py</pre></div>
+</div>
+</section>
+
+<section id="case-object">
+<h2>PyCase Object & Core Methods</h2>
+<p><code>PyCase</code> is the master container holding the electrical topology, device models, solver states, and results.</p>
+<div class="api-list">
+<div class="api-item"><div class="api-head"><span class="api-name">devenpy.PyCase()</span><span class="tag">Constructor</span></div><div class="signature">PyCase() -&gt; None</div><p class="desc">Construct a new empty PyCase instance.</p></div>
+<div class="api-item"><div class="api-head"><span class="api-name">case.copy()</span><span class="tag">Case Utility</span></div><div class="signature">copy() -&gt; PyCase</div><p class="desc">Create an independent, deep in-memory clone of the network model and solver state for contingency screening and what-if analysis.</p></div>
+</div>
+</section>
+
+<section id="ingestion">
+<h2>Data Ingestion & Universal Extended I/O</h2>
+<p>Load network models from RAWX, RAW, encrypted .deven, or extended formats (MATPOWER, CDF, Excel):</p>
+<div class="api-list">
+<div class="api-item" data-search="load_rawx PSS/E RAWX XML JSON recommended"><div class="api-head"><span class="api-name">case.load_rawx(path)</span><span class="tag tag-recom">★ First Preference</span></div><div class="signature">load_rawx(path: str) -&gt; None</div><p class="desc"><b>First Preference:</b> Load PSS/E RAWX format files (v35/v36 XML or JSON structured format) with high-speed schema parsing and full numeric precision.</p></div>
+<div class="api-item" data-search="load_raw PSS/E RAW v30 v36 sequence data"><div class="api-head"><span class="api-name">case.load_raw(path)</span><span class="tag">PSS/E RAW</span></div><div class="signature">load_raw(path: str) -&gt; None</div><p class="desc">Load standard PSS/E RAW format files (versions 30 through 36), including zero-sequence impedances and transformer grounding.</p></div>
+<div class="api-item" data-search="load_deven save_deven encrypted native database"><div class="api-head"><span class="api-name">case.load_deven(path) · case.save_deven(path)</span><span class="tag">Native DevEN Encrypted</span></div><div class="signature">load_deven(path: str) -&gt; None<br>save_deven(path: str) -&gt; None</div><p class="desc">Load or save native DevEN SQLite database files (.deven). The file is securely encrypted on disk without prompting for passwords.</p></div>
+<div class="api-item" data-search="load_grid_file universal matpower cdf excel aux ucte cim"><div class="api-head"><span class="api-name">devenpy.load_grid_file(path) · deven_io</span><span class="tag">Universal Extended I/O</span></div><div class="signature">load_grid_file(filepath: str, work_with_slack: bool = False) -&gt; PyCase</div><p class="desc">Universal parser supporting MATPOWER (<code>.m</code>), IEEE CDF (<code>.cdf</code>), Excel workbooks (<code>.xlsx</code>, <code>.xls</code>), PowerWorld (<code>.aux</code>), UCTE (<code>.def</code>), and CIM/CGMES RDF XML (<code>.xml</code>, <code>.zip</code>).</p></div>
+<div class="api-item" data-search="load auto detect extension"><div class="api-head"><span class="api-name">case.load(path)</span><span class="tag">Auto-Detect</span></div><div class="signature">load(path: str) -&gt; None</div><p class="desc">Automatically detect format by file extension (.rawx, .raw, .deven, .json) and load the grid.</p></div>
+</div>
+</section>
+
+<section id="modifiers">
+<h2>In-Memory Network Modifiers</h2>
+<p>Dynamically modify network components in memory without re-parsing files:</p>
+<table class="param-table"><thead><tr><th>Method</th><th>Parameters</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>chng_bus()</code></td><td>bus_id, vm, va, base_kv, ide, gl, bl</td><td>Modify voltage initial estimate, base kV, bus type (1=PQ, 2=PV, 3=Slack, 4=Isolated), and shunts.</td></tr>
+<tr><td><code>chng_load()</code></td><td>bus_id, id, pl, ql, status</td><td>Modify load active/reactive power demand and in-service status.</td></tr>
+<tr><td><code>chng_gen()</code></td><td>bus_id, id, pg, qg, vs, status, qmax, qmin</td><td>Modify generator active power, voltage setpoint, reactive limits, and status.</td></tr>
+<tr><td><code>chng_brn()</code></td><td>f, t, ckt, r, x, b, ratio, angle, status, rate_a</td><td>Modify branch impedance, line charging, tap ratio, phase shift, status, and MVA rating.</td></tr>
+<tr><td><code>scs_chng_bus()</code></td><td>bus_id, is_grid_infeed, sk_mva, rx_ratio, z01_ratio, cb_mva</td><td>Modify short circuit capacity, system R/X ratio, and breaker rating.</td></tr>
+<tr><td><code>scs_chng_gen()</code></td><td>bus_id, id, xd_sub, x2, x0, conn, gnd_r, gnd_x</td><td>Modify subtransient reactance Xd'', sequence reactances, and grounding impedance.</td></tr>
+<tr><td><code>scs_chng_brn()</code></td><td>f, t, ckt, r0, x0, b0, from_conn, to_conn</td><td>Modify branch zero-sequence impedance and transformer winding connections.</td></tr>
+</tbody></table>
+</section>
+
+<section id="load-flow">
+<h2>Load Flow Analysis (LFA) API</h2>
+<div class="signature">solve_load_flow(method="nr", tol=1e-5, max_iter=30, work_with_slack=None, island_policy="auto_isolate", enforce_q_limits=True, show_q_limits=False, flat_start=False) -&gt; Dict[str, Any]</div>
+<p class="desc">Returns a dictionary containing <code>converged</code> (bool), <code>iterations</code> (int), <code>max_dp</code> (float), and <code>max_dq</code> (float).</p>
+</section>
+
+<section id="short-circuit">
+<h2>Short Circuit Studies (SCS) API</h2>
+<div class="signature">solve_short_circuit(fault_bus, fault_type="3phase", r_f=0.0, x_f=0.0, c_factor=1.1, method="iec", breaker_check=True) -&gt; Dict[str, Any]</div>
+<p class="desc">Calculates initial symmetrical short-circuit current <code>ik_ka</code>, peak making current <code>ip_ka</code>, symmetrical breaking current <code>ib_ka</code>, short-circuit power <code>sk_mva</code>, and equivalent <code>xr_ratio</code>.</p>
+<div class="signature">scs_gen_contrib(bus, id="") -&gt; Dict[str, Any]<br>scs_brn_flow(f, t, ckt="") -&gt; Dict[str, Any]<br>scs_breaker_duty(bus, cb_mva=None) -&gt; Dict[str, Any]</div>
+<p class="desc">Queries post-fault individual generator fault current, branch flow inflows, and circuit breaker interrupting duty percentage.</p>
+</section>
+
+<section id="results">
+<h2>Results, Queries & Export</h2>
+<div class="api-list">
+<div class="api-item"><div class="api-name">case.bus_data_array(param) · case.brn_data_array(param)</div><p class="desc">Vectorized C-speed extraction of all bus voltages ('VM', 'VA') or branch flows across the entire network.</p></div>
+<div class="api-item"><div class="api-name">case.report_dict() · case.report_json()</div><p class="desc">Return complete simulation results (bus results, branch flows, generator outputs) as Python dict or serialized JSON.</p></div>
+<div class="api-item"><div class="api-name">case.write_out(path) · case.kcl_report(path)</div><p class="desc">Generate formatted columnar PSS/E reports (.out) and bus-by-bus active/reactive energy conservation balances (.kcl).</p></div>
+</div>
+</section>
+
+<section id="cli">
+<h2>Master Command-Line Interface</h2>
+<p>The <code>devenpy</code> command line tool is built directly into the pip package and requires no external binaries:</p>
+<div class="code"><button class="copy" type="button">Copy</button><pre># Scaffolding: Export all 6 runners into the active terminal folder
+devenpy --export-runners
+
+# Web Documentation: Launch interactive portal on local web server
+devenpy --docs
+devenpy --docs --port 8080
+
+# Direct Simulations (RAWX First Preference)
+devenpy cases/bench.rawx                                   # AC Load Flow (NR on RAWX)
+devenpy cases/bench.rawx --study scs --scan                # Full system fault scan
+devenpy cases/bench.rawx --format out -o output.out        # PSS/E columnar report</pre></div>
+</section>
+
+<section id="formats">
+<h2>Supported Network Formats</h2>
+<div class="study-grid">
+<div class="study recommended"><b>★ PSS/E RAWX (.rawx) [First Preference]</b><p><b>Recommended standard:</b> Schema-validated XML/JSON structured format with full floating-point precision.</p></div>
+<div class="study"><b>PSS/E RAW (.raw)</b><p>Supports legacy versions 30 through 36, including zero-sequence data and FACTS devices.</p></div>
+<div class="study"><b>Native DevEN Database (.deven)</b><p>Fast encrypted SQLite format storing topology, solved states, and sequence parameters.</p></div>
+<div class="study"><b>MATPOWER, IEEE CDF & Excel</b><p>Universal parsing of .m, .cdf, and .xlsx via <code>deven_io</code> module.</p></div>
+<div class="study"><b>PowerWorld AUX & UCTE DEF</b><p>Direct parsing of PowerWorld .aux scripts and European UCTE transmission files.</p></div>
+<div class="study"><b>CIM / CGMES RDF XML (.xml, .zip)</b><p>IEC 61970 / 61968 Common Information Model profiles.</p></div>
+</div>
+</section>
+
+<footer class="footer" id="contact">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;align-items:center">
+    <div>
+      <strong style="color:var(--ink);font-size:16px;display:flex;align-items:center;gap:6px">
+        DevEN <span style="font-size:13px;color:var(--muted);font-weight:500">(devenpy)</span>
+      </strong>
+      <div style="margin-top:3px;color:var(--ink);font-size:13px;font-weight:600">Power system study engine</div>
+      <div style="margin-top:3px;color:var(--green);font-size:12px;font-weight:600">Made in India from Bengaluru</div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+      <div>
+        <span style="color:#788593;font-size:11px;text-transform:uppercase;letter-spacing:.08em;display:block">Support Email</span>
+        <a href="mailto:devarajedeva2002@gmail.com" style="color:var(--blue);font-weight:600;font-size:13px">devarajedeva2002@gmail.com</a>
+      </div>
+      <div>
+        <span style="color:#788593;font-size:11px;text-transform:uppercase;letter-spacing:.08em;display:block">GitHub Repository</span>
+        <a href="https://github.com/DevEN-PS/DevEN" target="_blank" rel="noreferrer" style="color:var(--blue);font-weight:600;font-size:13px">github.com/DevEN-PS/DevEN</a>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;border-top:1px solid #edf0f3;padding-top:12px;margin-top:6px;font-size:11.5px;color:#8995a1;flex-wrap:wrap;gap:10px">
+    <span>© 2026 DevEN. Made in India from Bengaluru. All rights reserved. Distributed under MIT License.</span>
+    <span>Engine: devenpy v1.0.0 (Native C-Extension / Python 3.9 - 3.13)</span>
+  </div>
+</footer>
+</main>
+</div>
+<script>
+const searchInput=document.getElementById('apiSearch');
+const results=document.getElementById('searchResults');
+const entries=[...document.querySelectorAll('main section, .api-item, .study, .runner-card, tr')].map((el,i)=>({el,title:(el.querySelector('h1,h2,h3,h4,.api-name,.study b,td code')?.textContent||el.textContent).trim().replace(/\s+/g,' ').slice(0,100),body:(el.innerText||'').toLowerCase(),id:el.id||el.closest('section')?.id||''})).filter(x=>x.title&&x.id);
+function runSearch(){
+ const q=searchInput.value.trim().toLowerCase(); results.innerHTML='';
+ if(!q){results.classList.remove('show');return}
+ const hits=entries.filter(x=>x.body.includes(q)||x.title.toLowerCase().includes(q)).slice(0,12);
+ if(!hits.length){results.innerHTML='<div class="result"><strong>No matching documentation found</strong><small>Try a method name, parameter, runner or study area.</small></div>'}
+ else hits.forEach(x=>{const a=document.createElement('a');a.className='result';a.href='#'+x.id;a.innerHTML='<strong></strong><small></small>';a.querySelector('strong').textContent=x.title;a.querySelector('small').textContent='Open documentation section';a.addEventListener('click',()=>results.classList.remove('show'));results.appendChild(a)});
+ results.classList.add('show');
+}
+searchInput.addEventListener('input',runSearch);
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();searchInput.focus()}if(e.key==='Escape'){results.classList.remove('show');searchInput.blur()}});
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{const t=b.parentElement.querySelector('pre').innerText;try{await navigator.clipboard.writeText(t);b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1300)}catch{b.textContent='Select code';}}));
+const links=[...document.querySelectorAll('.side-link')];const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);const observer=new IntersectionObserver(items=>items.forEach(item=>{if(item.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+item.target.id))}}),{rootMargin:'-18% 0px -70% 0px'});sections.forEach(s=>observer.observe(s));
+</script>
+</body></html>
